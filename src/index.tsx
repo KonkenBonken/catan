@@ -1,14 +1,19 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
-import App from './App';
+
+import Board from './Board';
+
+const board = new Board();
+console.log(board);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <StrictMode>
+    {board.render()}
+  </StrictMode>
 );

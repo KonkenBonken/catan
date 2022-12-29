@@ -46,3 +46,11 @@ export const TileResources = [
   ]),
   Resource.Desert,
 ]
+
+export const TileWidths = [
+  [0, 3],
+  [3, 4],
+  [7, 5],
+  [12, 4],
+  [16, 3],
+]
