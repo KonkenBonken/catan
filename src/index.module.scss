@@ -52,9 +52,12 @@ body, body > div {
 }
 
 .tileNumber {
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 2px 5px 15px black, inset -5px -8px 6px #0005;
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-color: white;
   border-radius: 50%;
   display: grid;
