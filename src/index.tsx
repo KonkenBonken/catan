@@ -1,12 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './index.css';
-
-import Board from './Board';
-
-const board = new Board();
-console.log(board);
+import Game from './Game';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    {board.render()}
+    <Game />
   </StrictMode>
 );

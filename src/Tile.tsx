@@ -1,5 +1,7 @@
-import { Resource } from './types/enums'
+import scss from './index.module.scss'
 
+import { Resource } from './types/enums'
+import Tileset from './Tileset128'
 
 export default class Tile {
   resource: Resource = Resource.Desert
@@ -11,8 +13,9 @@ export default class Tile {
   }
 
   render() {
-    return <div className="tile" data-resource={this.resource}>
-      <div className="number">{this.number}</div>
+    return <div className={scss.tile} data-resource={this.resource}>
+      <Tileset resource={this.resource} />
+      <div className={scss.tileNumber}>{this.number}</div>
     </div>
   }
 }
