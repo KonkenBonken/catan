@@ -44,17 +44,11 @@ body, body > div {
   height: $tileHeight;
 }
 
-.tileImageWrapper {
+.tileImage {
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   width: inherit;
   height: inherit;
-  overflow: hidden;
-  scale: $hexagonRatio calc(1/$hexagonRatio);
-  rotate: 30deg;
-
-  > img {
-    width: $tileWidth * 3;
-    height: $tileHeight * 4;
-  }
+  object-fit: cover;
 }
 
 .tileNumber {

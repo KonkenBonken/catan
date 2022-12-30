@@ -7,4 +7,7 @@ declare module '*.module.scss' {
   export default classNames
 }
 
-declare module '*.png'
+declare module '*.jpg' {
+  declare const src: string
+  export default src
+}

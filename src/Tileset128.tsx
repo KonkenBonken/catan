@@ -2,30 +2,26 @@
 import scss from './index.module.scss'
 
 import { Resource } from './types/enums'
-import Tiles128 from './assets/Tiles128.png'
 
-const hexagonRatio = 1.1547005;
+import DesertSrc from './assets/Desert.jpg'
+import WoodSrc from './assets/Wood.jpg'
+import WheatSrc from './assets/Wheat.jpg'
+import StoneSrc from './assets/Stone.jpg'
+import ClaySrc from './assets/Clay.jpg'
+import SheepSrc from './assets/Sheep.jpg'
 
-console.log(scss)
-
-const tileXY = {
-  [Resource.Desert]: [0, 0],
-  [Resource.Wood]: [2, 2],
-  [Resource.Wheat]: [1, 1],
-  [Resource.Stone]: [0, 2],
-  [Resource.Clay]: [1, 2],
-  [Resource.Sheep]: [2, 1],
-} as Record<Resource, [number, number]>;
+const tileTexture = {
+  [Resource.Desert]: DesertSrc,
+  [Resource.Wood]: WoodSrc,
+  [Resource.Wheat]: WheatSrc,
+  [Resource.Stone]: StoneSrc,
+  [Resource.Clay]: ClaySrc,
+  [Resource.Sheep]: SheepSrc,
+} as Record<Resource, string>;
 
 export default function Tile({ resource }: { resource: Resource }) {
-  const [x, y] = tileXY[resource];
-
   return (
-    <div className={scss.tileImageWrapper} >
-      <img src={Tiles128} style={{
-        objectPosition: `-${x * 128}px -${y * 128 * hexagonRatio}px`
-      }} />
-    </div>
+    <img src={tileTexture[resource]} className={scss.tileImage} />
   )
 
 }
