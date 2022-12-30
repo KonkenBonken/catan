@@ -1,12 +1,13 @@
 $hexagonRatio: 1.1547005;
-$tileWidth: 128px;
+$tileWidth: 19vmin;
 $tileHeight: $tileWidth*$hexagonRatio;
 
-body, body > div {
+body, body > div, :root {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
+  font-size: $tileWidth * 0.15625;
 }
 
 .game {
@@ -52,13 +53,13 @@ body, body > div {
 }
 
 .tileNumber {
-  font-size: 20px;
+  font-size: 1rem;
   font-family: fantasy;
   color: #222;
-  box-shadow: 2px 5px 15px black, inset -5px -8px 6px #0005;
+  box-shadow: .1em .25em .75em black, inset -.25em -.4em .3em #0005;
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 2em;
+  height: 2em;
   background-color: white;
   border-radius: 50%;
   display: grid;
