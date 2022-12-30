@@ -1,4 +1,4 @@
-export enum Resource {
+export const enum Resource {
   Desert,
   Wood,
   Wheat,
