@@ -8,6 +8,7 @@ body, body > div, :root {
   width: 100vw;
   height: 100vh;
   font-size: $tileWidth * 0.15625;
+  overflow: hidden;
 }
 
 .game {
@@ -20,7 +21,7 @@ body, body > div, :root {
 
 .board {
   width: $tileWidth * 5;
-  height: $tileHeight * 5;
+  height: $tileWidth * 4.625;
 }
 
 .tileRow {
