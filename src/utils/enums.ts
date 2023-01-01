@@ -1,5 +1,5 @@
 export const enum Resource {
-  Desert,
+  Desert = 0,
   Wood,
   Wheat,
   Stone,
@@ -8,7 +8,7 @@ export const enum Resource {
 }
 
 export const enum Player {
-  Red,
+  Red = 1,
   Yellow,
   Blue,
   White,
