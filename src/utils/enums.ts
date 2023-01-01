@@ -13,3 +13,8 @@ export const enum Player {
   Blue,
   White,
 }
+
+export const enum Building {
+  Village = 1,
+  City,
+}
