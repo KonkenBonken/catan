@@ -13,7 +13,7 @@ export default class Tile {
   render() {
     return <div className={cls('tile')} data-resource={this.resource}>
       <Tileset resource={this.resource} />
-      {this.number && <div className={cls('tileNumber')}>{this.number}</div>}
+      {!!this.number && <div className={cls('tileNumber')}>{this.number}</div>}
       {
         [this.edges, this.corners]
           .flatMap(Object.values)
