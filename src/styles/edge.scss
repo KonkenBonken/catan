@@ -1,1 +1,5 @@
-.edge {}
+@use "./consts.scss" as *;
+
+.edge {
+  z-index: 1;
+}

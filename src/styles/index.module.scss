@@ -23,6 +23,7 @@ body, body > div, :root {
 .board {
   width: $tileWidth * 5;
   height: $tileWidth * 4.625;
+  isolation: isolate;
 }
 
 .tileRow {

@@ -1,1 +1,5 @@
-.corner {}
+@use "./consts.scss" as *;
+
+.corner {
+  z-index: 2;
+}
