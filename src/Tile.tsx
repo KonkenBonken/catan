@@ -15,7 +15,7 @@ export default class Tile {
   render() {
     return <div className={scss.tile} data-resource={this.resource}>
       <Tileset resource={this.resource} />
-      <div className={scss.tileNumber}>{this.number}</div>
+      {this.number && <div className={scss.tileNumber}>{this.number}</div>}
     </div>
   }
 }
