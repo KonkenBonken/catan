@@ -1,5 +1,10 @@
-import scss from '../index.module.scss'
+import clsx from 'clsx'
 
-export function cls(...classNames: string[]) {
-  return classNames.map((className) => scss[className]).join(' ')
+import scss from '../styles/index.module.scss'
+
+export function cls(...inputs: Parameters<typeof clsx>) {
+  return clsx(...inputs)
+    .split(' ')
+    .map((className) => scss[className])
+    .join('')
 }
