@@ -1,0 +1,30 @@
+@use "./consts.scss" as *;
+
+.tile {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: $tileWidth;
+  height: $tileHeight;
+}
+
+.tileImage {
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
+.tileNumber {
+  font-size: 1rem;
+  font-family: fantasy;
+  color: #222;
+  box-shadow: .1em .25em .75em black, inset -.25em -.4em .3em #0005;
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background-color: white;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
