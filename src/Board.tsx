@@ -1,7 +1,6 @@
 import shuffle from 'shuffle-list'
 
-import scss from './index.module.scss'
-
+import { cls } from './utils/utilities'
 import Tile from './Tile'
 import { Numbers, TileResources, TileWidths } from './utils/BoardData'
 
@@ -11,9 +10,9 @@ export default class Board {
   )
 
   render() {
-    return (<div className={scss.board}>{
+    return (<div className={cls('board')}>{
       TileWidths.map(([start, width], rowIndex) =>
-        <div key={rowIndex} className={scss.tileRow}>
+        <div key={rowIndex} className={cls('tileRow')}>
           {
             this.tiles.slice(start, start + width).map(tile => tile.render())
           }

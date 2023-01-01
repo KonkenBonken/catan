@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import scss from './index.module.scss'
-
+import { cls } from './utils/utilities'
 import { Resource } from './utils/enums'
 
 import DesertSrc from './assets/Desert.jpg'
@@ -21,7 +20,7 @@ const tileTexture = {
 
 export default function Tile({ resource }: { resource: Resource }) {
   return (
-    <img src={tileTexture[resource]} className={scss.tileImage} />
+    <img src={tileTexture[resource]} className={cls('tileImage')} />
   )
 
 }

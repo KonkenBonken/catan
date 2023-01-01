@@ -1,12 +1,12 @@
 import Board from './Board';
 
-import scss from './index.module.scss'
+import { cls } from './utils/utilities'
 
 const board = new Board();
 console.log(board);
 
 export default function Game() {
-  return <div className={scss.game}>
+  return <div className={cls('game')}>
     {board.render()}
   </div>;
 }
