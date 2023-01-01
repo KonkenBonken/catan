@@ -7,14 +7,14 @@ export const enum Resource {
   Sheep,
 }
 
-export const enum Player {
+export enum Player {
   Red = 1,
   Yellow,
   Blue,
   White,
 }
 
-export const enum Building {
+export enum Building {
   Village = 1,
   City,
 }

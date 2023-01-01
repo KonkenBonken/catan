@@ -17,7 +17,7 @@ export default class Tile {
       {
         [this.edges, this.corners]
           .flatMap(Object.values)
-          .map(({ render }) => render())
+          .map(element => element.render())
       }
     </div>
   }

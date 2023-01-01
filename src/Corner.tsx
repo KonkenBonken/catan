@@ -10,7 +10,7 @@ export default class Corner {
   }
 
   render() {
-    return <div className={cls('corner')}></div>
+    return <div className={cls('corner', { hasBuilding: this.hasBuilding }, Player[this.owner || -1])} />
   }
 
   build(newOwner: Player, newBuilding: Building) {

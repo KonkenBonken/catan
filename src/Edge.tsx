@@ -9,7 +9,7 @@ export class Edge {
   }
 
   render() {
-    return <div className={cls('edge')}></div>
+    return <div className={cls('edge', { hasRoad: this.hasRoad }, Player[this.owner || -1])} />
   }
 
   build(newOwner: Player) {
