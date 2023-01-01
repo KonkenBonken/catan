@@ -6,5 +6,5 @@ export function cls(...inputs: Parameters<typeof clsx>) {
   return clsx(...inputs)
     .split(' ')
     .map((className) => scss[className])
-    .join('')
+    .join(' ')
 }
