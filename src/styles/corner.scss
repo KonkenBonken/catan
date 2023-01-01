@@ -1,5 +1,26 @@
 @use "./consts.scss" as *;
 
 .corner {
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
   z-index: 2;
+
+  &.N {
+    top: -.75em;
+    background-color: lightgreen;
+  }
+
+  &.NE {
+    top: $topHeight*.5;
+    right: -.75em;
+    background-color: lightcoral;
+  }
+
+  &.SE {
+    bottom: $topHeight*.5;
+    right: -.75em;
+    background-color: lightblue;
+  }
 }
