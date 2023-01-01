@@ -1,5 +1,63 @@
 @use "./consts.scss" as *;
 
+.edges {
+  margin-top: $topHeight*.5;
+
+  > div {
+    justify-content: center;
+    gap: $tileWidth;
+    height: 0;
+    margin-bottom: $topHeight*1.5;
+
+    &:nth-child(2n-1) {
+      gap: $tileWidth*.5;
+
+      > .edge {
+        rotate: 60deg;
+
+        &:nth-child(even) {
+          rotate: -60deg;
+        }
+      }
+
+      &:nth-child(n+7) {
+        > .edge {
+          rotate: 60deg;
+
+          &:nth-child(odd) {
+            rotate: -60deg;
+          }
+        }
+      }
+    }
+  }
+}
+
 .edge {
   z-index: 1;
+  position: relative;
+  margin: -$sideLength*.5 -.25em;
+  width: .5em;
+  height: $sideLength;
+  border-radius: .25em;
+
+  &::after {
+    content: '';
+    display: block;
+    position: relative;
+  }
+
+  &:hover {
+    background-color: rgba(#ddd, .5);
+  }
+
+  @each $name, $color in $playerColors {
+    &.#{$name} {
+      background-color: $color;
+
+      &:hover {
+        background-color: lighten($color, 2);
+      }
+    }
+  }
 }

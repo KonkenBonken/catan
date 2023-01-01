@@ -1,4 +1,8 @@
+@forward "sass:math";
 @use "sass:math" as *;
 $hexagonRatio: calc(2/sqrt(3));
 $tileWidth: 19vmin;
 $tileHeight: $tileWidth*$hexagonRatio;
+$sideLength: $tileHeight*.5;
+$topHeight: $sideLength*.5;
+$playerColors: ("Red": red, "Yellow":yellow, "Blue":blue, "Green":green, )

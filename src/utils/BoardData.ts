@@ -54,3 +54,6 @@ export const TileWidths = [
   [12, 4],
   [16, 3],
 ]
+
+export const Corners = [3, 4, 4, 5, 5, 6, 6, 5, 5, 4, 4, 3]
+export const Edges = [6, 4, 8, 5, 10, 6, 10, 5, 8, 4, 6]

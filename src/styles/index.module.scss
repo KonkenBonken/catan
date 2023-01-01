@@ -24,18 +24,17 @@ body, body > div, :root {
   width: $tileWidth * 5;
   height: $tileWidth * 4.625;
   isolation: isolate;
-}
+  position: relative;
 
-.tileRow {
-  display: flex;
-  flex-wrap: nowrap;
-  margin-bottom: -$tileHeight * .25;
+  > div {
+    position: absolute;
+    top: 0;
+    width: inherit;
+    height: inherit;
 
-  &:nth-child(1), &:nth-child(5) {
-    margin-left: $tileWidth;
-  }
-
-  &:nth-child(2), &:nth-child(4) {
-    margin-left: $tileWidth * .5;
+    > div {
+      display: flex;
+      flex-wrap: nowrap;
+    }
   }
 }

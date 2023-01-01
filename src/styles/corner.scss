@@ -1,26 +1,35 @@
 @use "./consts.scss" as *;
 
+.corners > div {
+  margin-bottom: $topHeight;
+  justify-content: center;
+  gap: $tileWidth;
+  height: 0;
+
+  &:nth-child(2n) {
+    margin-bottom: $topHeight*2;
+  }
+}
+
 .corner {
-  position: absolute;
+  z-index: 2;
+  position: relative;
+  margin: -.75em;
   width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
-  z-index: 2;
 
-  &.N {
-    top: -.75em;
-    background-color: lightgreen;
+  &:hover {
+    background-color: rgba(#ddd, .5);
   }
 
-  &.NE {
-    top: $topHeight*.5;
-    right: -.75em;
-    background-color: lightcoral;
-  }
+  @each $name, $color in $playerColors {
+    &.#{$name} {
+      background-color: $color;
 
-  &.SE {
-    bottom: $topHeight*.5;
-    right: -.75em;
-    background-color: lightblue;
+      &:hover {
+        background-color: lighten($color, 2);
+      }
+    }
   }
 }

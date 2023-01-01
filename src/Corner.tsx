@@ -1,4 +1,4 @@
-import { Player, Building, Direction } from './utils/enums'
+import { Player, Building } from './utils/enums'
 import { cls } from './utils/utilities'
 
 export default class Corner {
@@ -9,10 +9,8 @@ export default class Corner {
     return this.building !== null;
   }
 
-  constructor(readonly direction: Direction) { }
-
   render() {
-    return <div className={cls('corner', { hasBuilding: this.hasBuilding }, Player[this.owner || -1], Direction[this.direction || -1])} />
+    return <div className={cls('corner', { hasBuilding: this.hasBuilding }, Player[this.owner || -1])} />
   }
 
   build(newOwner: Player, newBuilding: Building) {

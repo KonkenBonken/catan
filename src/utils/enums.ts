@@ -11,17 +11,10 @@ export enum Player {
   Red = 1,
   Yellow,
   Blue,
-  White,
+  Green,
 }
 
 export enum Building {
   Village = 1,
   City,
-}
-
-export enum Direction {
-  N = 1,
-  NE,
-  E,
-  SE,
 }
