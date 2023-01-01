@@ -1,4 +1,4 @@
-import { Resource } from './types/enums'
+import { Resource } from './enums'
 import shuffle from 'shuffle-list'
 
 export const Numbers = [

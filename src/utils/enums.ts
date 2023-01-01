@@ -6,3 +6,10 @@ export const enum Resource {
   Clay,
   Sheep,
 }
+
+export const enum Player {
+  Red,
+  Yellow,
+  Blue,
+  White,
+}

@@ -1,6 +1,6 @@
 import scss from './index.module.scss'
 
-import { Resource } from './types/enums'
+import { Resource } from './utils/enums'
 import Tileset from './Tileset128'
 
 export default class Tile {

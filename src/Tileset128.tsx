@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import scss from './index.module.scss'
 
-import { Resource } from './types/enums'
+import { Resource } from './utils/enums'
 
 import DesertSrc from './assets/Desert.jpg'
 import WoodSrc from './assets/Wood.jpg'

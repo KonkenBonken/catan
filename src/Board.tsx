@@ -3,7 +3,7 @@ import shuffle from 'shuffle-list'
 import scss from './index.module.scss'
 
 import Tile from './Tile'
-import { Numbers, TileResources, TileWidths } from './BoardData'
+import { Numbers, TileResources, TileWidths } from './utils/BoardData'
 
 export default class Board {
   tiles: Tile[] = Object.seal(
