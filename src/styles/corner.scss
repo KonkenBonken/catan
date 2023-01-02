@@ -19,17 +19,31 @@
   height: 1.5em;
   border-radius: 50%;
 
-  &:hover {
+  &:not(.hasBuilding):hover {
     background-color: rgba(#ddd, .5);
   }
 
-  @each $name, $color in $playerColors {
-    &.#{$name} {
-      background-color: $color;
+  &.hasBuilding {
+    &::after, &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -50%;
+      left: -25%;
+      height: 150%;
+      width: 150%;
+      align-self: center;
+      background-size: 300% 100%;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+    }
 
-      &:hover {
-        background-color: lighten($color, 2);
-      }
+    &::after {
+      background-image: url('../assets/roofs.png');
+    }
+
+    &::before {
+      background-image: url('../assets/walls.png');
     }
   }
 }
