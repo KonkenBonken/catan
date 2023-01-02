@@ -18,9 +18,14 @@
   width: 1.5em;
   height: 1.5em;
   border-radius: 50%;
+  isolation: isolate;
 
   &:not(.hasBuilding):hover {
     background-color: rgba(#ddd, .5);
+  }
+
+  &.hasCity {
+    top: 1.5em * .2;
   }
 
   &.hasBuilding {
@@ -28,35 +33,72 @@
       content: '';
       display: block;
       position: absolute;
-      top: -50%;
-      left: -25%;
-      height: 150%;
-      width: 150%;
-      align-self: center;
-      background-size: 300% 100%;
+      top: 1.5em * -.5;
+      left: 1.5em * -.25;
+      height: 1.5em * 1.5;
+      width: 1.5em * 1.5;
+      background-size: (1.5em*1.5*3) (1.5em*1.5);
+      background-position-x: -(1.5em*1.5*2);
       background-repeat: no-repeat;
       image-rendering: pixelated;
     }
 
     &::after {
       background-image: url('../assets/roofs.png');
+      z-index: 3;
     }
 
     &::before {
-      filter: drop-shadow(-.05em .25em .25em #000c);
+      filter: drop-shadow(-.05em .25em .25em #000c) drop-shadow(0em -.5em .25em #0005);
       background-image: url('../assets/walls.png');
+      z-index: 2;
     }
 
-    &.Blue::after {
+    &.Blue::after, &.Blue ::after {
       filter: hue-rotate(95deg);
     }
 
-    &.Yellow::after {
+    &.Yellow::after, &.Yellow ::after {
       filter: hue-rotate(256deg) brightness(1.2);
     }
 
-    &.Red::after {
+    &.Red::after, &.Red ::after {
       filter: hue-rotate(229deg) brightness(.9);
+    }
+  }
+
+  .cityHouse {
+    filter: brightness(.95);
+
+    &::after, &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+      top: 1.5em * -.8;
+      left: 1.5em * -.50;
+      height: 1.5em * 1.5;
+      width: 1.5em * 1.5;
+      background-size: (1.5em*1.5*3) (1.5em*1.5);
+    }
+
+    &::after {
+      background-image: url('../assets/roofs.png');
+      z-index: 1;
+    }
+
+    &::before {
+      background-image: url('../assets/walls.png');
+      z-index: 0;
+    }
+
+    &:last-child {
+      &::after, &::before {
+        left: .25em;
+        transform: scaleX(-1);
+        background-position-x: -(1.5em*1.5);
+      }
     }
   }
 }

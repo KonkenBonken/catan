@@ -13,8 +13,13 @@ export default class Corner {
   render() {
     return <div
       onClick={() => this.onClick()}
-      className={cls('corner', { hasBuilding: this.hasBuilding }, Player[this.owner || -1], Building[this.building || -1])}
-    />
+      className={cls('corner', { hasBuilding: this.hasBuilding, hasCity: this.building === Building.City }, Player[this.owner || -1])}
+    >
+      {this.building === Building.City && <>
+        <div className={cls('cityHouse')} />
+        <div className={cls('cityHouse')} />
+      </>}
+    </div>
   }
 
   private onClick() {
