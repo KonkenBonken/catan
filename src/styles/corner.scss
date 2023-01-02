@@ -24,7 +24,7 @@
     background-color: rgba(#ddd, .5);
   }
 
-  &.hasCity {
+  &.hasTown {
     top: 1.5em * .2;
   }
 
@@ -67,7 +67,7 @@
     }
   }
 
-  .cityHouse {
+  .townHouse {
     filter: brightness(.95);
 
     &::after, &::before {

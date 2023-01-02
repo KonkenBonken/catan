@@ -13,11 +13,11 @@ export default class Corner {
   render() {
     return <div
       onClick={() => this.onClick()}
-      className={cls('corner', { hasBuilding: this.hasBuilding, hasCity: this.building === Building.City }, Player[this.owner || -1])}
+      className={cls('corner', { hasBuilding: this.hasBuilding, hasTown: this.building === Building.Town }, Player[this.owner || -1])}
     >
-      {this.building === Building.City && <>
-        <div className={cls('cityHouse')} />
-        <div className={cls('cityHouse')} />
+      {this.building === Building.Town && <>
+        <div className={cls('townHouse')} />
+        <div className={cls('townHouse')} />
       </>}
     </div>
   }
@@ -25,14 +25,14 @@ export default class Corner {
   private onClick() {
     this.build(
       [Player.Red, Player.Yellow, Player.Blue, Player.Green][Math.floor(Math.random() * 4)],
-      [Building.City, Building.Village][Math.floor(Math.random() * 2)]
+      [Building.House, Building.Town][Math.floor(Math.random() * 2)]
     )
   }
 
   build(newOwner: Player, newBuilding: Building) {
     if (
       !this.hasBuilding ||
-      (this.building === Building.Village && this.owner === newOwner)
+      (this.building === Building.House && this.owner === newOwner)
     ) {
       this.owner = newOwner;
       this.building = newBuilding;

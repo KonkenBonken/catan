@@ -15,6 +15,6 @@ export enum Player {
 }
 
 export enum Building {
-  Village = 1,
-  City,
+  House = 1,
+  Town,
 }
