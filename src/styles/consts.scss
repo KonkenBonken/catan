@@ -1,7 +1,7 @@
 @forward "sass:math";
 @use "sass:math" as *;
 $hexagonRatio: calc(2/sqrt(3));
-$tileWidth: 19vmin;
+$tileWidth: 20vmin;
 $tileHeight: $tileWidth*$hexagonRatio;
 $sideLength: $tileHeight*.5;
 $topHeight: $sideLength*.5;

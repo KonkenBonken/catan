@@ -2,6 +2,7 @@
 @use "./tile.scss";
 @use "./edge.scss";
 @use "./corner.scss";
+@use "./game.scss";
 
 body, body > div, :root {
   margin: 0;
@@ -10,31 +11,4 @@ body, body > div, :root {
   height: 100vh;
   font-size: $tileWidth * 0.15625;
   overflow: hidden;
-}
-
-.game {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  position: relative;
-}
-
-.board {
-  width: $tileWidth * 5;
-  height: $tileWidth * 4.625;
-  isolation: isolate;
-  position: relative;
-
-  > div {
-    position: absolute;
-    top: 0;
-    width: inherit;
-    height: inherit;
-
-    > div {
-      display: flex;
-      flex-wrap: nowrap;
-    }
-  }
 }
