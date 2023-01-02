@@ -10,10 +10,13 @@ export default class Edge {
   }
 
   render() {
-    return <div onClick={this.onClick.bind(this)} className={cls('edge', { hasRoad: this.hasRoad }, Player[this.owner || -1])} />
+    return <div
+      onClick={() => this.onClick()}
+      className={cls('edge', { hasRoad: this.hasRoad }, Player[this.owner || -1])}
+    />
   }
 
-  onClick() {
+  private onClick() {
     this.build(Player.Green)
   }
 
