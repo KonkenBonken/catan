@@ -41,12 +41,6 @@
   height: $sideLength;
   border-radius: .25em;
 
-  &::after {
-    content: '';
-    display: block;
-    position: relative;
-  }
-
   &:hover {
     background-color: rgba(#ddd, .5);
   }
