@@ -1,5 +1,6 @@
 import { Player } from './utils/enums'
 import { cls } from './utils/utilities'
+import rerender from './utils/Rerender'
 
 export default class Edge {
   owner: Player | null = null
@@ -9,11 +10,17 @@ export default class Edge {
   }
 
   render() {
-    return <div className={cls('edge', { hasRoad: this.hasRoad }, Player[this.owner || -1])} />
+    return <div onClick={this.onClick.bind(this)} className={cls('edge', { hasRoad: this.hasRoad }, Player[this.owner || -1])} />
+  }
+
+  onClick() {
+    this.build(Player.Green)
   }
 
   build(newOwner: Player) {
-    if (!this.hasRoad)
+    if (!this.hasRoad) {
       this.owner = newOwner;
+      rerender();
+    }
   }
 }
