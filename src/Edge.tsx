@@ -17,7 +17,7 @@ export default class Edge {
   }
 
   private onClick() {
-    this.build(Player.Green)
+    this.build([Player.Red, Player.Yellow, Player.Blue, Player.Green][Math.floor(Math.random() * 4)])
   }
 
   build(newOwner: Player) {

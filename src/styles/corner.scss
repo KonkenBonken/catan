@@ -43,7 +43,20 @@
     }
 
     &::before {
+      filter: drop-shadow(-.05em .25em .25em #000c);
       background-image: url('../assets/walls.png');
+    }
+
+    &.Blue::after {
+      filter: hue-rotate(95deg);
+    }
+
+    &.Yellow::after {
+      filter: hue-rotate(256deg) brightness(1.2);
+    }
+
+    &.Red::after {
+      filter: hue-rotate(229deg) brightness(.9);
     }
   }
 }

@@ -18,7 +18,10 @@ export default class Corner {
   }
 
   private onClick() {
-    this.build(Player.Blue, Building.Village)
+    this.build(
+      [Player.Red, Player.Yellow, Player.Blue, Player.Green][Math.floor(Math.random() * 4)],
+      [Building.City, Building.Village][Math.floor(Math.random() * 2)]
+    )
   }
 
   build(newOwner: Player, newBuilding: Building) {

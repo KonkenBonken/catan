@@ -6,8 +6,8 @@ $tileHeight: $tileWidth*$hexagonRatio;
 $sideLength: $tileHeight*.5;
 $topHeight: $sideLength*.5;
 $playerColors: ( //
-    "Red": hsl(358, 46%, 45%),
-    "Yellow":hsl(35, 73%, 68%),
-    "Blue":hsl(199, 29%, 53%),
-    "Green":hsl(79, 32%, 51%),
+    "Red": hsl(0deg 46% 56%),
+    "Yellow":hsl(28deg 70% 55%),
+    "Blue":hsl(216deg 57% 56%),
+    "Green":hsl(134deg 54% 39%),
   )
