@@ -25,17 +25,6 @@ export default class Board {
 
   render() {
     return (<div className={cls('board')}>
-      <div className={cls('tiles')}>
-        {
-          TileWidths.map(([start, width], rowIndex) =>
-            <div key={rowIndex} >
-              {
-                this.tiles.slice(start, start + width).map(tile => tile.render())
-              }
-            </div>
-          )
-        }
-      </div>
       <div className={cls('corners')}>
         {
           this.corners.map(cornerRow => <div>
@@ -48,6 +37,17 @@ export default class Board {
           this.edges.map(edgeRow => <div>
             {edgeRow.map(edge => edge.render())}
           </div>)
+        }
+      </div>
+      <div className={cls('tiles')}>
+        {
+          TileWidths.map(([start, width], rowIndex) =>
+            <div key={rowIndex} >
+              {
+                this.tiles.slice(start, start + width).map(tile => tile.render())
+              }
+            </div>
+          )
         }
       </div>
     </div>
