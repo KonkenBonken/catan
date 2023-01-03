@@ -27,7 +27,7 @@
   object-fit: cover;
   z-index: 0;
   image-rendering: pixelated;
-  background-size: 25%;
+  background-size: $tileWidth*.25 $tileHeight*.25;
 
   &.Wheat {
     filter: brightness(1.1);
@@ -37,6 +37,18 @@
   &.Sheep {
     filter: brightness(1.2) saturate(1.3);
     background-image: url('../assets/Sheep.png');
+
+    &::after {
+      content: '';
+      display: block;
+      background-image: url('../assets/sheepAnimal.png');
+      width: $tileWidth*.25*.25;
+      height: $tileHeight*.125*.25;
+      background-size: 100%;
+      position: absolute;
+      top: 50%;
+      left: 15%;
+    }
   }
 
   &.Wood {
