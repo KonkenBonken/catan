@@ -1,7 +1,8 @@
 import { Player } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
-import board from './Board';
+import Corner from './Corner'
+import board from './Board'
 
 export default class Edge {
   owner: Player | null = null
@@ -10,9 +11,15 @@ export default class Edge {
     return this.owner !== null;
   }
 
-  get neighboringEdges() {
+  get myCoords() {
     const myRow = board.edges.findIndex(row => row.includes(this)),
-      myCol = board.edges[myRow].findIndex(row => row === this),
+      myCol = board.edges[myRow].findIndex(row => row === this);
+    return [myRow, myCol] as const
+
+  }
+
+  get neighboringEdges() {
+    const [myRow, myCol] = this.myCoords,
       tiltedRow = !(myRow % 2),
       belowMid = myRow > 5,
       isMid = myRow === 5,
@@ -32,6 +39,7 @@ export default class Edge {
     } else {
       neighbors.push(board.edges[myRow - 1]?.[Math.floor((myCol) * 2)]);
       neighbors.push(board.edges[myRow + 1]?.[Math.floor((myCol) * 2)]);
+
       if (isMid) {
         neighbors.push(board.edges[myRow - 1]?.[Math.floor((myCol) * 2 - 1)]);
         neighbors.push(board.edges[myRow + 1]?.[Math.floor((myCol) * 2 - 1)]);
@@ -43,6 +51,27 @@ export default class Edge {
         neighbors.push(board.edges[myRow - 1]?.[Math.floor((myCol) * 2 - 1)]);
         neighbors.push(board.edges[myRow + 1]?.[Math.floor((myCol) * 2 + 1)]);
       }
+    }
+    return neighbors.filter(x => x);
+  }
+
+  get neighboringCorners() {
+    const [myRow, myCol] = this.myCoords,
+      tiltedRow = !(myRow % 2),
+      belowMid = myRow > 5,
+      neighbors: Corner[] = [];
+
+    if (tiltedRow) {
+      if (belowMid) {
+        neighbors.push(board.corners[myRow]?.[Math.ceil(myCol / 2)]);
+        neighbors.push(board.corners[myRow + 1]?.[Math.ceil((myCol - 1) / 2)]);
+      } else {
+        neighbors.push(board.corners[myRow]?.[Math.ceil((myCol - 1) / 2)]);
+        neighbors.push(board.corners[myRow + 1]?.[Math.ceil(myCol / 2)]);
+      }
+    } else {
+      neighbors.push(board.corners[myRow]?.[myCol]);
+      neighbors.push(board.corners[myRow + 1]?.[myCol]);
     }
     return neighbors.filter(x => x);
   }
