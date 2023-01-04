@@ -1,11 +1,16 @@
 import { Player } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
-import Corner from './Corner'
 import board from './Board'
+import type Corner from './Corner'
 
 export default class Edge {
   owner: Player | null = null
+  private memo: {
+    neighboringEdges?: Edge[],
+    neighboringCorners?: Corner[],
+  } = {}
+
 
   get hasRoad() {
     return this.owner !== null;
@@ -19,6 +24,9 @@ export default class Edge {
   }
 
   get neighboringEdges() {
+    if (this.memo.neighboringEdges)
+      return this.memo.neighboringEdges;
+
     const [myRow, myCol] = this.myCoords,
       tiltedRow = !(myRow % 2),
       belowMid = myRow > 5,
@@ -50,10 +58,19 @@ export default class Edge {
           edges[myRow + (belowMid ? 1 : -1)]?.[Math.floor((myCol) * 2 - 1)]
         );
     }
-    return neighbors.filter(x => x);
+
+    for (let i = 0; i < neighbors.length; i++)
+      if (neighbors[i] === undefined)
+        neighbors.splice(i, 1);
+
+    this.memo.neighboringEdges = neighbors;
+    return neighbors;
   }
 
   get neighboringCorners() {
+    if (this.memo.neighboringCorners)
+      return this.memo.neighboringCorners;
+
     const [myRow, myCol] = this.myCoords,
       tiltedRow = !(myRow % 2),
       belowMid = myRow > 5,
@@ -71,7 +88,12 @@ export default class Edge {
         corners[myRow + 1]?.[myCol]
       );
 
-    return neighbors.filter(x => x);
+    for (let i = 0; i < neighbors.length; i++)
+      if (neighbors[i] === undefined)
+        neighbors.splice(i, 1);
+
+    this.memo.neighboringCorners = neighbors;
+    return neighbors;
   }
 
   render() {
