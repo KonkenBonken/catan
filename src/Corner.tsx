@@ -1,6 +1,7 @@
 import { Player, Building } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
+import board from './Board';
 
 export default class Corner {
   building: Building | null = null
@@ -8,6 +9,14 @@ export default class Corner {
 
   get hasBuilding() {
     return this.building !== null;
+  }
+
+  get neighboringEdges() {
+    return board.edges.flat().filter(edge => edge.neighboringCorners.includes(this));
+  }
+
+  get neighboringCorners() {
+    return this.neighboringEdges.flatMap(edge => edge.neighboringCorners).filter(corner => corner !== this);
   }
 
   render() {
