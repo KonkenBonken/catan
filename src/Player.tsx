@@ -1,7 +1,14 @@
-import { PlayerColors } from './utils/enums'
+import { PlayerColors, Resource } from './utils/enums'
 import board from './Board'
 
 export default class Player {
+  balance: Record<Exclude<Resource, Resource.Desert>, number> = {
+    [Resource.Wood]: 0,
+    [Resource.Wheat]: 0,
+    [Resource.Stone]: 0,
+    [Resource.Clay]: 0,
+    [Resource.Sheep]: 0
+  }
 
   constructor(readonly color: PlayerColors) { };
 
