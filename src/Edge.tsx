@@ -24,7 +24,6 @@ export default class Edge {
     const myRow = board.edges.findIndex(row => row.includes(this)),
       myCol = board.edges[myRow].findIndex(row => row === this);
     return [myRow, myCol] as const
-
   }
 
   get neighboringEdges() {
@@ -92,12 +91,13 @@ export default class Edge {
         corners[myRow + 1]?.[myCol]
       );
 
-    for (let i = 0; i < neighbors.length; i++)
-      if (neighbors[i] === undefined)
-        neighbors.splice(i, 1);
-
     this.memo.neighboringCorners = neighbors;
     return neighbors;
+  }
+
+  get neighboringTiles() {
+    const [{ neighboringTiles: A }, { neighboringTiles: B }] = this.neighboringCorners;
+    return A.filter(tile => B.includes(tile))
   }
 
   render() {

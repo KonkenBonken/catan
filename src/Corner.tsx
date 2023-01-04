@@ -1,8 +1,9 @@
-import { PlayerColors, Building } from './utils/enums'
+import { PlayerColors, Building, Resource } from './utils/enums'
 import Player, { Players } from './Player'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
+import type Tile from './Tile';
 
 export default class Corner {
   building: Building | null = null
@@ -16,12 +17,43 @@ export default class Corner {
     return this.building !== null;
   }
 
+  get myCoords() {
+    const myRow = board.corners.findIndex(row => row.includes(this)),
+      myCol = board.corners[myRow].findIndex(row => row === this);
+    return [myRow, myCol] as const
+  }
+
   get neighboringEdges() {
     return board.edges.flat().filter(edge => edge.neighboringCorners.includes(this));
   }
 
   get neighboringCorners() {
     return this.neighboringEdges.flatMap(edge => edge.neighboringCorners).filter(corner => corner !== this);
+  }
+
+  get neighboringTiles() {
+    const [myRow, myCol] = this.myCoords,
+      belowMid = myRow > 5,
+      isTop = !(myRow % 2),
+      neighbors: Tile[] = [],
+      { tiles } = board;
+
+    neighbors.push(
+      tiles[Math.floor(myRow / 2)]?.[Math.floor(myCol + (belowMid ? -1 : 0))]
+    );
+
+    if (isTop)
+      neighbors.push(
+        tiles[Math.floor(myRow / 2) - 1]?.[Math.floor(myCol)],
+        tiles[Math.floor(myRow / 2) - 1]?.[Math.floor(myCol - 1)]
+      )
+    else
+      neighbors.push(
+        tiles[Math.floor(myRow / 2) - 1]?.[Math.floor(myCol + (belowMid ? 0 : -1))],
+        tiles[Math.floor(myRow / 2)]?.[Math.floor(myCol + (belowMid ? 0 : -1))]
+      );
+
+    return neighbors.filter(tile => tile && tile.resource !== Resource.Desert);
   }
 
   render() {
