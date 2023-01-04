@@ -7,6 +7,10 @@ export default new (class Game {
   readonly board = board
   readonly players = Players
 
+  tilesByNumber(num: number) {
+    return this.board.tiles.flat().filter(tile => tile.number === num)
+  }
+
   render() {
     return <div className={cls('game')}>
       <Rerenderable el={
