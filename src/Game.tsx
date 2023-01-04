@@ -2,6 +2,7 @@ import { cls } from './utils/utilities'
 import { Rerenderable } from './utils/Rerender'
 import board from './Board';
 import { Players } from './Player';
+import { Dice } from './Dice';
 
 export default new (class Game {
   readonly board = board
@@ -16,6 +17,7 @@ export default new (class Game {
       <Rerenderable el={
         board.render.bind(board)
       } />
+      <Dice />
     </div>;
   }
 })()

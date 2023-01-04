@@ -1,0 +1,39 @@
+@use "./consts.scss" as *;
+
+.DiceWrapper {
+  --dice-size: 4em;
+  position: fixed;
+  background-color: #faa8;
+  border-radius: 1em;
+  top: calc(50vh - 4em);
+  animation: DiceIn 500ms ease-out;
+  transition-duration: 800ms;
+  transition-property: scale, top;
+  transition-timing-function: ease-out, ease-in-out;
+
+  > div:not(.DiceResult) {
+    // .container
+    display: inline-flex;
+  }
+
+  > .DiceResult {
+    text-align: center;
+    position: absolute
+  }
+
+  &.Rolled {
+    top: 0;
+    scale: 50%;
+    transform-origin: top;
+
+    > .DiceResult {
+      color: #053;
+    }
+  }
+
+  @keyframes DiceIn {
+    from {
+      scale: 0;
+    }
+  }
+}

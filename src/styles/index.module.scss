@@ -3,6 +3,7 @@
 @use "./edge.scss";
 @use "./corner.scss";
 @use "./game.scss";
+@use "./dice.scss";
 
 body, body > div, :root {
   margin: 0;
@@ -10,5 +11,6 @@ body, body > div, :root {
   width: 100vw;
   height: 100vh;
   font-size: $tileWidth * 0.15625;
+  font-family: fantasy;
   overflow: hidden;
 }
