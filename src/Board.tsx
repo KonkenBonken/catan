@@ -4,13 +4,11 @@ import { cls } from './utils/utilities'
 import Tile from './Tile'
 import Corner from './Corner'
 import Edge from './Edge'
-import { Numbers, TileResources, TileWidths, Corners, Edges } from './utils/BoardData'
+import { TileNumbers, TileResources, Tiles, Corners, Edges } from './utils/BoardData'
 
 export default new (
   class Board {
-    tiles = Object.seal(
-      shuffle(TileResources.map((resource, i) => new Tile(resource, Numbers[i]))),
-    )
+    tiles: Tile[][] = [];
 
     corners = Object.seal(
       Corners.map(length =>
@@ -23,6 +21,12 @@ export default new (
         Object.seal(
           Array.from({ length }, () => new Edge())
         )))
+
+    constructor() {
+      const tiles = shuffle(TileResources.map((resource, i) => new Tile(resource, TileNumbers[i])));
+      for (const width of Tiles)
+        this.tiles.push(tiles.splice(0, width))
+    }
 
     render() {
       return (<div className={cls('board')}>
@@ -42,13 +46,9 @@ export default new (
         </div>
         <div className={cls('tiles')}>
           {
-            TileWidths.map(([start, width], rowIndex) =>
-              <div key={rowIndex} >
-                {
-                  this.tiles.slice(start, start + width).map(tile => tile.render())
-                }
-              </div>
-            )
+            this.tiles.map(tileRow => <div>
+              {tileRow.map(tile => tile.render())}
+            </div>)
           }
         </div>
       </div>
