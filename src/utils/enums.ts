@@ -7,7 +7,7 @@ export enum Resource {
   Sheep,
 }
 
-export enum Player {
+export enum PlayerColors {
   Red = 1,
   Yellow,
   Blue,

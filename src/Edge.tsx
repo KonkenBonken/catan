@@ -1,6 +1,7 @@
-import { Player } from './utils/enums'
+import { PlayerColors } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
+import Player, { Players } from './Player'
 import board from './Board'
 import type Corner from './Corner'
 
@@ -11,6 +12,9 @@ export default class Edge {
     neighboringCorners?: Corner[],
   } = {}
 
+  get color() {
+    return this.owner?.color;
+  }
 
   get hasRoad() {
     return this.owner !== null;
@@ -99,12 +103,12 @@ export default class Edge {
   render() {
     return <div
       onClick={() => this.onClick()}
-      className={cls('edge', { hasRoad: this.hasRoad }, Player[this.owner || -1])}
+      className={cls('edge', { hasRoad: this.hasRoad }, PlayerColors[this.color ?? -1])}
     />
   }
 
   private onClick() {
-    this.build([Player.Red, Player.Yellow, Player.Blue, Player.Green][Math.floor(Math.random() * 4)])
+    this.build([Players.Red, Players.Yellow, Players.Blue, Players.Green][Math.floor(Math.random() * 4)])
   }
 
   build(newOwner: Player) {

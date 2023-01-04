@@ -1,4 +1,5 @@
-import { Player, Building } from './utils/enums'
+import { PlayerColors, Building } from './utils/enums'
+import Player, { Players } from './Player'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
@@ -6,6 +7,10 @@ import board from './Board';
 export default class Corner {
   building: Building | null = null
   owner: Player | null = null
+
+  get color() {
+    return this.owner?.color;
+  }
 
   get hasBuilding() {
     return this.building !== null;
@@ -22,7 +27,7 @@ export default class Corner {
   render() {
     return <div
       onClick={() => this.onClick()}
-      className={cls('corner', { hasBuilding: this.hasBuilding, hasTown: this.building === Building.Town }, Player[this.owner || -1])}
+      className={cls('corner', { hasBuilding: this.hasBuilding, hasTown: this.building === Building.Town }, PlayerColors[this.color ?? -1])}
     >
       {this.building === Building.Town && <>
         <div className={cls('townHouse')} />
@@ -33,7 +38,7 @@ export default class Corner {
 
   private onClick() {
     this.build(
-      [Player.Red, Player.Yellow, Player.Blue, Player.Green][Math.floor(Math.random() * 4)],
+      [Players.Red, Players.Yellow, Players.Blue, Players.Green][Math.floor(Math.random() * 4)],
       [Building.House, Building.Town][Math.floor(Math.random() * 2)]
     )
   }
