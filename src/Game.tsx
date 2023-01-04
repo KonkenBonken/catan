@@ -1,14 +1,17 @@
-import board from './Board';
-
 import { cls } from './utils/utilities'
 import { Rerenderable } from './utils/Rerender'
+import board from './Board';
+import { Players } from './Player';
 
-console.log(board);
+export default new (class Game {
+  readonly board = board
+  readonly players = Players
 
-export default function Game() {
-  return <div className={cls('game')}>
-    <Rerenderable el={
-      board.render.bind(board)
-    } />
-  </div>;
-}
+  render() {
+    return <div className={cls('game')}>
+      <Rerenderable el={
+        board.render.bind(board)
+      } />
+    </div>;
+  }
+})()

@@ -1,7 +1,11 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Game from './Game';
+import game from './Game';
+
+// @ts-expect-error
+window.game = game;
+console.log(game);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -9,6 +13,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <StrictMode>
-    <Game />
+    {game.render()}
   </StrictMode>
 );
