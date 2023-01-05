@@ -18,7 +18,7 @@ export default class Tile {
   render() {
     return <div className={cls('tile')} >
       <Tileset resource={this.resource} />
-      {!!this.number && <div className={cls('tileNumber')}>{this.number}</div>}
+      {!!this.number && <div className={cls('tileNumber', { marked: Math.abs(this.number - 7) === 1 })}>{this.number}</div>}
     </div>
   }
 }

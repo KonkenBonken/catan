@@ -79,4 +79,9 @@
   display: grid;
   place-items: center;
   z-index: 3;
+
+  &.marked {
+    font-size: 1.1em;
+    color: #922;
+  }
 }
