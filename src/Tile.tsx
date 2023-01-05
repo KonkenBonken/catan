@@ -1,4 +1,4 @@
-import { Resource } from './utils/enums'
+import { Resource, Building } from './utils/enums'
 import { cls } from './utils/utilities'
 import Tileset from './Tileset128'
 import board from './Board'
@@ -13,6 +13,16 @@ export default class Tile {
 
   get neighboringCorners() {
     return board.corners.flat().filter(corner => corner.neighboringTiles.includes(this));
+  }
+
+  giveResources(): void {
+    if (this.resource !== Resource.Desert)
+      for (const corner of this.neighboringCorners)
+        if (corner.hasBuilding && corner.owner) {
+          corner.owner.balance[this.resource]++;
+          if (corner.building === Building.Town)
+            corner.owner.balance[this.resource]++;
+        }
   }
 
   render() {

@@ -1,3 +1,5 @@
+import shuffle from 'shuffle-list'
+
 import { PlayerColors, Resource } from './utils/enums'
 import board from './Board'
 
@@ -26,4 +28,15 @@ export const Players = {
   Yellow: new Player(PlayerColors.Yellow),
   Blue: new Player(PlayerColors.Blue),
   Green: new Player(PlayerColors.Green),
+}
+
+const turnGenerator = (function* () {
+  const players = shuffle(Object.values(Players));
+  let i = 0;
+  while (true)
+    yield players[i++ % players.length]
+})()
+
+export function nextPlayer() {
+  return turnGenerator.next().value
 }
