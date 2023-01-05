@@ -12,6 +12,8 @@
 }
 
 .corner {
+  //$size: 2.25em;
+  $size: $pixelDensity * 32;
   z-index: 2;
   position: relative;
   margin: -.75em;
@@ -33,12 +35,12 @@
       content: '';
       display: block;
       position: absolute;
-      top: 1.5em * -.5;
-      left: 1.5em * -.25;
-      height: 1.5em * 1.5;
-      width: 1.5em * 1.5;
-      background-size: (1.5em*1.5*3) (1.5em*1.5);
-      background-position-x: -(1.5em*1.5*2);
+      top: calc($size/-3);
+      left: calc($size/-6);
+      height: $size;
+      width: $size;
+      background-size: $size*3 $size;
+      background-position-x: -$size*2;
       background-repeat: no-repeat;
       image-rendering: pixelated;
     }
@@ -76,11 +78,11 @@
       position: absolute;
       background-repeat: no-repeat;
       image-rendering: pixelated;
-      top: 1.5em * -.8;
-      left: 1.5em * -.50;
-      height: 1.5em * 1.5;
-      width: 1.5em * 1.5;
-      background-size: (1.5em*1.5*3) (1.5em*1.5);
+      top: calc($size/-1.9);
+      left: calc($size/-3);
+      height: $size;
+      width: $size;
+      background-size: $size*3 $size;
     }
 
     &::after {

@@ -3,11 +3,13 @@
 $hexagonRatio: calc(2/sqrt(3));
 $tileWidth: 20vmin;
 $tileHeight: $tileWidth*$hexagonRatio;
+$globalFontSize: $tileWidth * 0.15625;
 $sideLength: $tileHeight*.5;
 $topHeight: $sideLength*.5;
+$pixelDensity: calc($globalFontSize * 2.25/32);
 $playerColors: ( //
     "Red": hsl(0deg 46% 56%),
     "Yellow":hsl(28deg 70% 55%),
     "Blue":hsl(216deg 57% 56%),
     "Green":hsl(134deg 54% 39%),
-  )
+  );

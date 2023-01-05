@@ -27,7 +27,8 @@
   object-fit: cover;
   z-index: 0;
   image-rendering: pixelated;
-  background-size: $tileWidth*.25 $tileHeight*.25;
+  // background-size: $tileWidth*.25 $tileHeight*.25;
+  background-size: $pixelDensity*16 $pixelDensity*16*$hexagonRatio;
 
   &.Wheat {
     filter: brightness(1.1);
