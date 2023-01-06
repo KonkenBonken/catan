@@ -4,14 +4,10 @@ import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
 import type Tile from './Tile';
+import Buildable from './Buildable'
 
-export default class Corner {
+export default class Corner extends Buildable {
   building: Building | null = null
-  owner: Player | null = null
-
-  get color() {
-    return this.owner?.color;
-  }
 
   get hasBuilding() {
     return this.building !== null;
@@ -32,6 +28,9 @@ export default class Corner {
   }
 
   get neighboringTiles() {
+    if (this.memo.neighboringTiles)
+      return this.memo.neighboringTiles;
+
     const [myRow, myCol] = this.myCoords,
       belowMid = myRow > 5,
       isTop = !(myRow % 2),
@@ -53,7 +52,12 @@ export default class Corner {
         tiles[Math.floor(myRow / 2)]?.[Math.floor(myCol + (belowMid ? 0 : -1))]
       );
 
-    return neighbors.filter(tile => tile && tile.resource !== Resource.Desert);
+    for (let i = 0; i < neighbors.length; i++)
+      if (neighbors[i] === undefined || neighbors[i].resource !== Resource.Desert)
+        neighbors.splice(i, 1);
+
+    this.memo.neighboringTiles = neighbors;
+    return neighbors;
   }
 
   render() {

@@ -4,17 +4,9 @@ import rerender from './utils/Rerender'
 import Player, { Players } from './Player'
 import board from './Board'
 import type Corner from './Corner'
+import Buildable from './Buildable'
 
-export default class Edge {
-  owner: Player | null = null
-  private memo: {
-    neighboringEdges?: Edge[],
-    neighboringCorners?: Corner[],
-  } = {}
-
-  get color() {
-    return this.owner?.color;
-  }
+export default class Edge extends Buildable {
 
   get hasRoad() {
     return this.owner !== null;
