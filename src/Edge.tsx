@@ -18,10 +18,7 @@ export default class Edge extends Buildable {
     return [myRow, myCol] as const
   }
 
-  get neighboringEdges() {
-    if (this.memo.neighboringEdges)
-      return this.memo.neighboringEdges;
-
+  get _neighboringEdges() {
     const [myRow, myCol] = this.myCoords,
       tiltedRow = !(myRow % 2),
       belowMid = myRow > 5,
@@ -54,18 +51,10 @@ export default class Edge extends Buildable {
         );
     }
 
-    for (let i = 0; i < neighbors.length; i++)
-      if (neighbors[i] === undefined)
-        neighbors.splice(i, 1);
-
-    this.memo.neighboringEdges = neighbors;
-    return neighbors;
+    return neighbors.filter(edge => edge);
   }
 
-  get neighboringCorners() {
-    if (this.memo.neighboringCorners)
-      return this.memo.neighboringCorners;
-
+  get _neighboringCorners() {
     const [myRow, myCol] = this.myCoords,
       tiltedRow = !(myRow % 2),
       belowMid = myRow > 5,
@@ -82,12 +71,10 @@ export default class Edge extends Buildable {
         corners[myRow]?.[myCol],
         corners[myRow + 1]?.[myCol]
       );
-
-    this.memo.neighboringCorners = neighbors;
     return neighbors;
   }
 
-  get neighboringTiles() {
+  get _neighboringTiles() {
     const [{ neighboringTiles: A }, { neighboringTiles: B }] = this.neighboringCorners;
     return A.filter(tile => B.includes(tile))
   }

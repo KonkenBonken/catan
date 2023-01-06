@@ -19,18 +19,15 @@ export default class Corner extends Buildable {
     return [myRow, myCol] as const
   }
 
-  get neighboringEdges() {
+  get _neighboringEdges() {
     return board.edges.flat().filter(edge => edge.neighboringCorners.includes(this));
   }
 
-  get neighboringCorners() {
+  get _neighboringCorners() {
     return this.neighboringEdges.flatMap(edge => edge.neighboringCorners).filter(corner => corner !== this);
   }
 
-  get neighboringTiles() {
-    if (this.memo.neighboringTiles)
-      return this.memo.neighboringTiles;
-
+  get _neighboringTiles() {
     const [myRow, myCol] = this.myCoords,
       belowMid = myRow > 5,
       isTop = !(myRow % 2),
@@ -52,12 +49,7 @@ export default class Corner extends Buildable {
         tiles[Math.floor(myRow / 2)]?.[Math.floor(myCol + (belowMid ? 0 : -1))]
       );
 
-    for (let i = 0; i < neighbors.length; i++)
-      if (neighbors[i] === undefined || neighbors[i].resource !== Resource.Desert)
-        neighbors.splice(i, 1);
-
-    this.memo.neighboringTiles = neighbors;
-    return neighbors;
+    return neighbors.filter(tile => tile && tile.resource !== Resource.Desert);
   }
 
   render() {

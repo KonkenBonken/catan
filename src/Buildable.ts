@@ -6,7 +6,7 @@ import { Building } from './utils/enums'
 
 export default abstract class Buildable {
   owner: Player | null = null
-  protected memo: {
+  private memo: {
     neighboringEdges?: Edge[]
     neighboringCorners?: Corner[]
     neighboringTiles?: Tile[]
@@ -22,9 +22,19 @@ export default abstract class Buildable {
 
   abstract get myCoords(): readonly [number, number]
 
-  abstract get neighboringEdges(): Edge[]
-  abstract get neighboringTiles(): Tile[]
-  abstract get neighboringCorners(): Corner[]
+  get neighboringEdges() {
+    return this.memo.neighboringEdges ??= this._neighboringEdges
+  }
+  get neighboringTiles() {
+    return this.memo.neighboringTiles ??= this._neighboringTiles
+  }
+  get neighboringCorners() {
+    return this.memo.neighboringCorners ??= this._neighboringCorners
+  }
+
+  protected abstract get _neighboringEdges(): Edge[]
+  protected abstract get _neighboringTiles(): Tile[]
+  protected abstract get _neighboringCorners(): Corner[]
 
   abstract build(newOwner: Player, newBuilding: Building): void
   abstract render(): JSX.Element
