@@ -18,3 +18,9 @@ export enum Building {
   House = 1,
   Town,
 }
+
+export enum GameState {
+  Pre = 1,
+  Main,
+  Post,
+}
