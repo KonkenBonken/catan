@@ -27,15 +27,20 @@ export default class Player {
   }
 }
 
-export const Players = {
-  Red: new Player(PlayerColors.Red),
-  Yellow: new Player(PlayerColors.Yellow),
-  Blue: new Player(PlayerColors.Blue),
-  Green: new Player(PlayerColors.Green),
-}
+export const Players = new (class Players extends Array<Player> {
+  readonly Red = new Player(PlayerColors.Red);
+  readonly Yellow = new Player(PlayerColors.Yellow);
+  readonly Blue = new Player(PlayerColors.Blue);
+  readonly Green = new Player(PlayerColors.Green);
+
+  protected 0 = this.Red;
+  protected 1 = this.Yellow;
+  protected 2 = this.Blue;
+  protected 3 = this.Green;
+})()
 
 const turnGenerator = (function* () {
-  const players = shuffle(Object.values(Players));
+  const players = shuffle(Players);
   let i = 0;
   while (true)
     yield players[i++ % players.length]

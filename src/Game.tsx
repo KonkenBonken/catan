@@ -20,11 +20,11 @@ export default new (class Game {
 
   async startGame() {
     this.state = GameState.Main;
-    while (Object.values(Players).every(player => player.points < 10)) {
+    while (Players.every(player => player.points < 10)) {
       await this.nextTurn();
       nextPlayer();
     }
-    console.log(Object.values(Players).find(player => player.points >= 10), 'Won!');
+    console.log(Players.find(player => player.points >= 10), 'Won!');
     this.state = GameState.Post;
   }
 

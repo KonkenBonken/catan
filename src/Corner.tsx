@@ -66,7 +66,7 @@ export default class Corner extends Buildable {
 
   private onClick() {
     this.build(
-      [Players.Red, Players.Yellow, Players.Blue, Players.Green][Math.floor(Math.random() * 4)],
+      Players[Math.floor(Math.random() * 4)],
       [Building.House, Building.Town][Math.floor(Math.random() * 2)]
     )
   }

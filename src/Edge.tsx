@@ -87,7 +87,7 @@ export default class Edge extends Buildable {
   }
 
   private onClick() {
-    this.build([Players.Red, Players.Yellow, Players.Blue, Players.Green][Math.floor(Math.random() * 4)])
+    this.build(Players[Math.floor(Math.random() * 4)])
   }
 
   build(newOwner: Player) {
