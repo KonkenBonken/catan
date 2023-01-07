@@ -2,6 +2,7 @@ import shuffle from 'shuffle-list'
 
 import { Building, PlayerColors, Resource } from './utils/enums'
 import board from './Board'
+import { cls } from './utils/utilities'
 
 export default class Player {
   resources: Record<Exclude<Resource, Resource.Desert>, number> = {
@@ -24,6 +25,16 @@ export default class Player {
 
   get points() {
     return this.Corners.length + this.Corners.filter(corner => corner.building === Building.Town).length
+  }
+
+  private get resourceArray() {
+    return Object.entries(this.resources).flatMap(([resource, count]) => Array<Resource>(count).fill(+resource));
+  }
+
+  render() {
+    return <div className={cls('player', PlayerColors[this.color])}>
+      {this.resourceArray.map(resource => <div className={cls('card', Resource[resource])} />)}
+    </div>
   }
 }
 

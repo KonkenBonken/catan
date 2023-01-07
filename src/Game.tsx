@@ -42,9 +42,12 @@ export default new (class Game {
 
   render() {
     return <div className={cls('game')}>
-      <Rerenderable el={
-        board.render.bind(board)
-      } />
+      <Rerenderable el={() => <>
+        {board.render()}
+        <div className={cls('players')}>
+          {Players.map(player => player.render())}
+        </div>
+      </>} />
       <Dice />
     </div>;
   }

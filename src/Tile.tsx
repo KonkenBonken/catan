@@ -2,6 +2,7 @@ import { Resource, Building } from './utils/enums'
 import { cls } from './utils/utilities'
 import Tileset from './Tileset128'
 import board from './Board'
+import rerender from './utils/Rerender';
 
 export default class Tile {
 
@@ -23,6 +24,7 @@ export default class Tile {
           if (corner.building === Building.Town)
             corner.owner.resources[this.resource]++;
         }
+    rerender()
   }
 
   render() {
