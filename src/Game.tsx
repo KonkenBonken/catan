@@ -14,7 +14,7 @@ export default new (class Game {
   }
 
   async nextTurn() {
-    const rolledNumber = await Roll();
+    const rolledNumber = await Roll(true);
 
     if (rolledNumber === 7) {
       console.warn('Rolled 7')
