@@ -41,6 +41,13 @@ const turnGenerator = (function* () {
     yield players[i++ % players.length]
 })()
 
+let currentPlayer = turnGenerator.next().value;
+
+export function getCurrentPlayer() {
+  return currentPlayer;
+}
+
 export function nextPlayer() {
-  return turnGenerator.next().value
+  currentPlayer = turnGenerator.next().value;
+  return currentPlayer;
 }
