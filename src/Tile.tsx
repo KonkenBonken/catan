@@ -19,9 +19,9 @@ export default class Tile {
     if (this.resource !== Resource.Desert)
       for (const corner of this.neighboringCorners)
         if (corner.hasBuilding && corner.owner) {
-          corner.owner.balance[this.resource]++;
+          corner.owner.resources[this.resource]++;
           if (corner.building === Building.Town)
-            corner.owner.balance[this.resource]++;
+            corner.owner.resources[this.resource]++;
         }
   }
 

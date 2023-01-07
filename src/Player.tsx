@@ -4,7 +4,7 @@ import { Building, PlayerColors, Resource } from './utils/enums'
 import board from './Board'
 
 export default class Player {
-  balance: Record<Exclude<Resource, Resource.Desert>, number> = {
+  resources: Record<Exclude<Resource, Resource.Desert>, number> = {
     [Resource.Wood]: 0,
     [Resource.Wheat]: 0,
     [Resource.Stone]: 0,
