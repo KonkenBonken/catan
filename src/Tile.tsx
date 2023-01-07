@@ -15,7 +15,7 @@ export default class Tile {
     return board.corners.flat().filter(corner => corner.neighboringTiles.includes(this));
   }
 
-  giveResources(): void {
+  giveResources() {
     if (this.resource !== Resource.Desert)
       for (const corner of this.neighboringCorners)
         if (corner.hasBuilding && corner.owner) {

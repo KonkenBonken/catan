@@ -13,7 +13,7 @@ export default new (class Game {
     return this.board.tiles.flat().filter(tile => tile.number === num)
   }
 
-  async nextTurn(): Promise<void> {
+  async nextTurn() {
     const rolledNumber = await Roll();
 
     if (rolledNumber === 7) {
