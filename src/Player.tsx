@@ -1,6 +1,6 @@
 import shuffle from 'shuffle-list'
 
-import { PlayerColors, Resource } from './utils/enums'
+import { Building, PlayerColors, Resource } from './utils/enums'
 import board from './Board'
 
 export default class Player {
@@ -20,6 +20,10 @@ export default class Player {
 
   get Edges() {
     return board.edges.flat().filter(edge => edge.owner === this)
+  }
+
+  get points() {
+    return this.Corners.length + this.Corners.filter(corner => corner.building === Building.Town).length
   }
 }
 
