@@ -5,7 +5,7 @@ import random from 'random'
 
 import { cls } from './utils/utilities'
 
-let Roll = (instant: boolean) => new Promise<number>(() => 0);
+let Roll = (instant = false) => new Promise<number>(() => 0);
 
 export function Dice() {
   const [elems, setElems] = useState<JSX.Element[]>([]),
@@ -37,4 +37,4 @@ export function Dice() {
   </div>;
 }
 
-export default (instant: boolean) => Roll(instant)
+export default (instant = false) => Roll(instant)
