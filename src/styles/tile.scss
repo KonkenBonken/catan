@@ -54,36 +54,7 @@
   image-rendering: pixelated;
   // background-size: $tileWidth*.25 $tileHeight*.25;
   background-size: $pixelDensity*16 $pixelDensity*16*$hexagonRatio;
-
-  &.Wheat {
-    filter: brightness(1.1);
-    background-image: url('../assets/Wheat.png');
-  }
-
-  &.Sheep {
-    filter: brightness(1.2) saturate(1.3);
-    background-image: url('../assets/Sheep.png');
-  }
-
-  &.Wood {
-    filter: contrast(1.5) brightness(1.1) saturate(.7);
-    background-image: url('../assets/Wood.png');
-  }
-
-  &.Stone {
-    filter: contrast(1.2) brightness(1.2) saturate(0.5);
-    background-image: url('../assets/Stone.png');
-  }
-
-  &.Clay {
-    filter: contrast(1.1) brightness(1.3) saturate(1.4);
-    background-image: url('../assets/Clay.png');
-  }
-
-  &.Desert {
-    filter: contrast(.9) brightness(1.1);
-    background-image: url('../assets/Desert.png');
-  }
+  @include textures;
 }
 
 .animal {
