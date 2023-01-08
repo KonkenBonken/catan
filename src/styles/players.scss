@@ -20,7 +20,7 @@
 
   @each $name, $color in $playerColors {
     &.#{$name} {
-      background: linear-gradient(to right, #0000, rgba($color, .3) 2em, rgba($color, .3) calc(100% - .2em), #0000);
+      background: linear-gradient(to right, #0000, rgba(lighten($color, 5), .75) 2em calc(100% - .5em), #0000);
 
       > .name > span {
         color: darken($color, 20);
@@ -49,6 +49,7 @@
       display: inline-block;
       transition: 300ms ease-out;
       transition-property: transform, margin-left, box-shadow;
+      animation: CardIn 500ms ease-out;
 
       &:first-child {
         box-shadow: .2em .1em .1em #0007;
@@ -80,6 +81,13 @@
         left: 0;
         inset: 0;
         rotate: 30deg;
+      }
+
+      @keyframes CardIn {
+        from {
+          scale: .75;
+          transform: rotateY(300deg);
+        }
       }
     }
   }

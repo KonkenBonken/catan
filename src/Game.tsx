@@ -28,8 +28,8 @@ export default new (class Game {
     this.state = GameState.Post;
   }
 
-  async nextTurn() {
-    const rolledNumber = await Roll();
+  async nextTurn(instant = false) {
+    const rolledNumber = await Roll(instant);
 
     if (rolledNumber === 7) {
       console.warn('Rolled 7')

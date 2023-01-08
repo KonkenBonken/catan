@@ -7,6 +7,17 @@
   place-items: center;
   position: relative;
   perspective: 30rem;
+
+  &::before {
+    content: '';
+    width: 150%;
+    height: 170%;
+    left: -25%;
+    background-image: url('../assets/Table.png');
+    position: absolute;
+    transform: rotateX(30deg);
+    filter: brightness(1.5) saturate(1.2) contrast(1.1);
+  }
 }
 
 .board {
@@ -26,6 +37,10 @@
     > div {
       display: flex;
       flex-wrap: nowrap;
+
+      > .tile {
+        filter: drop-shadow(0 .2em 0 darken(#dfae80, 50));
+      }
     }
   }
 }
