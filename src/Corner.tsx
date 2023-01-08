@@ -1,5 +1,5 @@
 import { PlayerColors, Building, Resource } from './utils/enums'
-import Player, { Players } from './Player'
+import Player, { Players, nextPlayer } from './Player'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
@@ -50,6 +50,12 @@ export default class Corner extends Buildable {
       );
 
     return neighbors.filter(tile => tile && tile.resource !== Resource.Desert);
+  }
+
+  constructor() {
+    super();
+    if (Math.random() < .3)
+      this.build(nextPlayer(), [Building.House, Building.Town][Math.floor(Math.random() * 2)])
   }
 
   render() {
