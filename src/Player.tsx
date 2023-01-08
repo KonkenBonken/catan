@@ -33,7 +33,11 @@ export default class Player {
 
   render() {
     return <div className={cls('player', PlayerColors[this.color])}>
-      {this.resourceArray.map(resource => <div className={cls('card', Resource[resource])} />)}
+      <div className={cls('resources')} style={{
+        '--count': this.resourceArray.length
+      } as React.CSSProperties}>
+        {this.resourceArray.map(resource => <div className={cls('card', Resource[resource])} />)}
+      </div>
     </div>
   }
 }

@@ -1,0 +1,41 @@
+@use "./consts.scss" as *;
+
+.players {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+}
+
+.player {
+  margin-bottom: .15em;
+
+  > .resources {
+    direction: rtl;
+
+    > .card {
+      $w : 1.3em;
+      $h : 1.9em;
+      margin-left: clamp(-.6em, -0.0875em*var(--count, 2) + 0.275em, .1em);
+      background: center center/#{$pixelDensity*8} $pixelDensity*8;
+      width: $w;
+      height: $h;
+      border-radius: .16em;
+      overflow: hidden;
+      display: inline-block;
+      box-shadow: .3em .1em .1em #0007;
+
+      &::after {
+        content: '';
+        background: url("../assets/paper.png") center / 100% 100%;
+        position: absolute;
+        width: $w*1.9;
+        left: $w*-.45;
+        height: $h*1.4;
+        top: $h*-.2;
+        filter: saturate(0);
+      }
+
+      @include textures(false);
+    }
+  }
+}
