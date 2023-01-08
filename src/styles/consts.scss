@@ -1,6 +1,7 @@
 @forward "sass:math";
 @use "sass:math" as *;
 @forward "./mixins.scss";
+@forward "./functions.scss";
 $hexagonRatio: calc(2/sqrt(3));
 $tileWidth: 20vmin;
 $tileHeight: $tileWidth*$hexagonRatio;

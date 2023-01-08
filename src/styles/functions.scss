@@ -1,0 +1,9 @@
+@function repeat($stmt, $n) {
+  $res: $stmt;
+
+  @for $i from 2 through $n {
+    $res: $res, #{$stmt};
+  }
+
+  @return $res;
+}
