@@ -5,14 +5,14 @@ import random from 'random'
 import { cls } from './utils/utilities'
 import { Resource } from './utils/enums'
 
-export default function Tile({ resource }: { resource: Resource }) {
+export default function TileImage({ resource }: { resource: Resource }) {
   if (resource === Resource.Sheep) return SheepTile();
   return <div className={cls('tileImage', Resource[resource])} />
 }
 
-
 const _sheepCount = 8,
   getSheepCount = () => random.int(_sheepCount - 2, _sheepCount + 2);
+
 function SheepTile() {
   const sheepCount = useMemo(getSheepCount, []),
     nums = useMemo(() =>

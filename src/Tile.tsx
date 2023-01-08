@@ -1,6 +1,6 @@
 import { Resource, Building } from './utils/enums'
 import { cls } from './utils/utilities'
-import Tileset from './Tileset128'
+import TileImage from './TileImage'
 import board from './Board'
 import rerender from './utils/Rerender';
 
@@ -29,7 +29,7 @@ export default class Tile {
 
   render() {
     return <div className={cls('tile')} >
-      <Tileset resource={this.resource} />
+      <TileImage resource={this.resource} />
       {!!this.number && <div className={cls('tileNumber', { marked: Math.abs(this.number - 7) === 1 })}>{this.number}</div>}
     </div>
   }
