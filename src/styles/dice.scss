@@ -12,14 +12,9 @@
   transition-property: scale, top, background-color, box-shadow;
   transition-timing-function: ease-out, ease-in-out, ease-out;
 
-  > div:not(.DiceResult) {
+  > div {
     display: inline-flex;
     filter: drop-shadow(0 .5em .75em #000a);
-  }
-
-  > .DiceResult {
-    text-align: center;
-    position: absolute
   }
 
   &.Rolled {
@@ -28,10 +23,6 @@
     transform-origin: top;
     background-color: #0000;
     box-shadow: none;
-
-    > .DiceResult {
-      color: #053;
-    }
   }
 
   @keyframes DiceIn {
