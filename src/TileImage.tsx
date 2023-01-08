@@ -16,14 +16,16 @@ const _sheepCount = 8,
 function SheepTile() {
   const sheepCount = useMemo(getSheepCount, []),
     nums = useMemo(() =>
-      Array(sheepCount * 4).fill(0).map(() => random.int(10, 90))
+      Array(sheepCount * 3).fill(0).map(() => random.int(10, 90))
       , []);
 
   return (
     <div className={cls('tileImage', 'Sheep')} >
       {Array(sheepCount).fill(0).map((_, i) =>
         <div key={i} className={cls('animal')} style={{
-          left: nums[i * 2] + '%', top: nums[i * 2 + 1] + '%', rotate: nums[i * 2 + 2] * 4 + 'deg', animationDelay: -nums[i * 2 + 3] + 's'
+          left: nums[i * 2] + '%',
+          top: nums[i * 2 + 1] + '%',
+          rotate: nums[i * 2 + 2] * 4 + 'deg'
         }} />
       )}
     </div>
