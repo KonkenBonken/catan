@@ -4,13 +4,31 @@
   position: fixed;
   top: 1em;
   right: 1em;
+  min-width: 10em;
+  direction: rtl;
 }
 
 .player {
-  margin-bottom: .15em;
+  padding: .3em .5em .2em;
+  min-height: 2.65em;
+
+  > .name {
+    height: 1.5em;
+    font-size: .5rem;
+    letter-spacing: .05ch;
+  }
+
+  @each $name, $color in $playerColors {
+    &.#{$name} {
+      background: linear-gradient(to right, #0000, rgba($color, .3) 2em, rgba($color, .3) calc(100% - .2em), #0000);
+
+      > .name > span {
+        color: darken($color, 20);
+      }
+    }
+  }
 
   > .resources {
-    direction: rtl;
     perspective: 10rem;
 
     > .card {
@@ -32,6 +50,10 @@
       transition: 300ms ease-out;
       transition-property: transform, margin-left, box-shadow;
 
+      &:first-child {
+        box-shadow: .2em .1em .1em #0007;
+      }
+
       &::after {
         content: '';
         background: url("../assets/paper.png") center / 100% 100%;
@@ -41,6 +63,7 @@
         height: $h*1.4;
         top: $h*-.2;
         filter: saturate(0);
+        pointer-events: none;
       }
 
       @include textures(false);

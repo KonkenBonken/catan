@@ -27,12 +27,19 @@ export default class Player {
     return this.Corners.length + this.Corners.filter(corner => corner.building === Building.Town).length
   }
 
+  get name() {
+    return PlayerColors[this.color]
+  }
+
   private get resourceArray() {
     return Object.entries(this.resources).flatMap(([resource, count]) => Array<Resource>(count).fill(+resource));
   }
 
   render() {
-    return <div className={cls('player', PlayerColors[this.color])}>
+    return <div className={cls('player', this.name)}>
+      <div className={cls('name')}>
+        Player <span>{this.name}</span>
+      </div>
       <div className={cls('resources')} style={{
         '--count': this.resourceArray.length
       } as React.CSSProperties}>
