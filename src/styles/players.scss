@@ -10,7 +10,7 @@
 
 .player {
   padding: .3em .5em .2em;
-  min-height: 2.65em;
+  height: 2.85em;
 
   > .name {
     height: 1.5em;
@@ -31,11 +31,15 @@
   > .resources {
     perspective: 10rem;
 
-    > .card {
-      @function count($k, $m: 0) {
-        @return calc($k*var(--count, 2) + $m);
-      }
+    @function count($k, $m: 0) {
+      @return calc($k*var(--count, 2) + $m);
+    }
 
+    &:has(:hover) > .card {
+      margin-left: calc(clamp(-.75em, count(-.0875em, .275em), .1em) - .24em);
+    }
+
+    > .card {
       $w : 1.3em;
       $h : 1.9em;
       margin-left: clamp(-.75em, count(-.0875em, .275em), .1em);
@@ -48,8 +52,16 @@
       overflow: hidden;
       display: inline-block;
       transition: 300ms ease-out;
-      transition-property: transform, margin-left, box-shadow;
+      transition-property: transform, margin, box-shadow;
       animation: CardIn 500ms ease-out;
+      position: relative;
+
+      &:hover {
+        transform: scale(1.2);
+        box-shadow: 0 .2em .4em #000c;
+        z-index: 1;
+        margin: 0 .3em;
+      }
 
       &:first-child {
         box-shadow: .2em .1em .1em #0007;
