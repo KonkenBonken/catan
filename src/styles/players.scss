@@ -51,9 +51,9 @@
       border-radius: .16em;
       overflow: hidden;
       display: inline-block;
-      transition: 300ms ease-out;
+      transition: .6s ease-in-out .7s;
       transition-property: transform, margin, box-shadow;
-      animation: CardIn 500ms ease-out;
+      animation: CardIn 1.2s ease-out forwards;
       position: relative;
 
       &:hover {
@@ -97,8 +97,12 @@
 
       @keyframes CardIn {
         from {
-          scale: .75;
-          transform: rotateY(300deg);
+          transform: rotateY(360deg) translate(calc(($tileWidth - $w) / 2), $tileHeight * .35);
+        }
+
+        to {
+          top: 0;
+          left: 0;
         }
       }
     }

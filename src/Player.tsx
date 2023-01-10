@@ -2,16 +2,12 @@ import shuffle from 'shuffle-list'
 
 import { Building, PlayerColors, Resource } from './utils/enums'
 import board from './Board'
+import ResourceCard from './ResourceCard'
 import { cls } from './utils/utilities'
+import rerender from './utils/Rerender';
 
 export default class Player {
-  resources: Record<Exclude<Resource, Resource.Desert>, number> = {
-    [Resource.Wood]: 0,
-    [Resource.Wheat]: 0,
-    [Resource.Stone]: 0,
-    [Resource.Clay]: 0,
-    [Resource.Sheep]: 0
-  }
+  resources: ResourceCard[] = []
 
   constructor(readonly color: PlayerColors) { };
 
@@ -31,8 +27,9 @@ export default class Player {
     return PlayerColors[this.color]
   }
 
-  private get resourceArray() {
-    return Object.entries(this.resources).flatMap(([resource, count]) => Array<Resource>(count).fill(+resource));
+  addResource(resource: Resource, tileDiv?: HTMLDivElement, town = false) {
+    this.resources.push(new ResourceCard(resource, tileDiv));
+    rerender();
   }
 
   render() {
@@ -41,9 +38,9 @@ export default class Player {
         Player <span>{this.name}</span>
       </div>
       <div className={cls('resources')} style={{
-        '--count': this.resourceArray.length
+        '--count': this.resources.length
       } as React.CSSProperties}>
-        {this.resourceArray.map(resource => <div className={cls('card', Resource[resource])} />)}
+        {this.resources.map(card => card.render())}
       </div>
     </div>
   }
