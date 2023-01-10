@@ -23,7 +23,7 @@
     border-radius: .16em;
     overflow: hidden;
     display: inline-block;
-    transition: .6s ease-in-out .7s;
+    transition: 300ms ease-out;
     transition-property: transform, margin, box-shadow;
     animation: CardIn 1.2s ease-out forwards;
     position: relative;
