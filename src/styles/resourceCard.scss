@@ -7,10 +7,6 @@
     @return calc($k*var(--count, 2) + $m);
   }
 
-  &:has(:hover) > .card {
-    margin-left: calc(clamp(-.75em, count(-.0875em, .275em), .1em) - .24em);
-  }
-
   > .card {
     $w : 1.3em;
     $h : 1.9em;
@@ -24,15 +20,16 @@
     overflow: hidden;
     display: inline-block;
     transition: 300ms ease-out;
-    transition-property: transform, margin, box-shadow;
+    transition-property: transform, margin, box-shadow, scale;
     animation: CardIn 1.2s ease-out forwards;
     position: relative;
 
     &:hover {
-      transform: scale(1.2);
+      transform: none;
+      scale: 1.2;
       box-shadow: 0 .2em .4em #000c;
       z-index: 1;
-      margin: 0 .3em;
+      margin-left: -.3em;
     }
 
     &:first-child {
