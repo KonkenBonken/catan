@@ -1,0 +1,81 @@
+@use "./consts.scss" as *;
+
+.resources {
+  perspective: 10rem;
+
+  @function count($k, $m: 0) {
+    @return calc($k*var(--count, 2) + $m);
+  }
+
+  &:has(:hover) > .card {
+    margin-left: calc(clamp(-.75em, count(-.0875em, .275em), .1em) - .24em);
+  }
+
+  > .card {
+    $w : 1.3em;
+    $h : 1.9em;
+    margin-left: clamp(-.75em, count(-.0875em, .275em), .1em);
+    transform: rotateY(clamp(330deg, count(-3.75deg, 367.5deg), 360deg));
+    box-shadow: clamp(.2em, count(.05em, .1em), .4em) .1em clamp(.1em, count(.0125em, .075em), .2em) #0007;
+    background: center center/#{$pixelDensity*8} $pixelDensity*8;
+    width: $w;
+    height: $h;
+    border-radius: .16em;
+    overflow: hidden;
+    display: inline-block;
+    transition: .6s ease-in-out .7s;
+    transition-property: transform, margin, box-shadow;
+    animation: CardIn 1.2s ease-out forwards;
+    position: relative;
+
+    &:hover {
+      transform: scale(1.2);
+      box-shadow: 0 .2em .4em #000c;
+      z-index: 1;
+      margin: 0 .3em;
+    }
+
+    &:first-child {
+      box-shadow: .2em .1em .1em #0007;
+    }
+
+    &::after {
+      content: '';
+      background: url("../assets/paper.png") center / 100% 100%;
+      position: absolute;
+      width: $w*1.9;
+      left: $w*-.45;
+      height: $h*1.4;
+      top: $h*-.2;
+      filter: saturate(0);
+      pointer-events: none;
+    }
+
+    @include textures(false);
+
+    &.Sheep::before {
+      $sheeps: 5;
+      content: '';
+      background-image: repeat(url('../assets/sheepAnimal.png'), $sheeps);
+      background-position: 50% 15%, 86% 74%, 77% 38%, 46% 64%, 23% 21%;
+      background-size: $tileWidth*.03125 $tileHeight*.015625;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 0;
+      left: 0;
+      inset: 0;
+      rotate: 30deg;
+    }
+
+    @keyframes CardIn {
+      from {
+        transform: rotateY(360deg) translate(calc(($tileWidth - $w) / 2), $tileHeight * .35);
+      }
+
+      to {
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
