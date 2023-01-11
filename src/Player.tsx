@@ -73,5 +73,6 @@ export function getCurrentPlayer() {
 
 export function nextPlayer() {
   currentPlayer = turnGenerator.next().value;
+  rerender();
   return currentPlayer;
 }

@@ -79,10 +79,15 @@ export default class Edge extends Buildable {
     return A.filter(tile => B.includes(tile))
   }
 
+  get canBuild() {
+    return !this.hasRoad
+      && this.neighboringEdges.some(edge => edge.owner === getCurrentPlayer())
+  }
+
   render() {
     return <div
       onClick={() => this.onClick()}
-      className={cls('edge', { hasRoad: this.hasRoad }, PlayerColors[this.color ?? -1])}
+      className={cls('edge', { hasRoad: this.hasRoad, canBuild: this.canBuild }, PlayerColors[this.color ?? -1])}
     />
   }
 
@@ -91,9 +96,10 @@ export default class Edge extends Buildable {
   }
 
   build() {
-    if (!this.hasRoad) {
-      this.owner = getCurrentPlayer();
-      rerender();
-    }
+    if (!this.canBuild)
+      return false;
+    this.owner = getCurrentPlayer();
+    rerender();
+    return true;
   }
 }

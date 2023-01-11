@@ -54,15 +54,7 @@ export default class Corner extends Buildable {
 
   get canBuild() {
     return (!this.hasBuilding || (this.building === Building.House && this.owner === getCurrentPlayer()))
-      && this.neighboringEdges.some(corner => corner.owner === getCurrentPlayer())
-  }
-
-  constructor() {
-    super();
-    if (Math.random() < .3)
-      setTimeout(() =>
-        this.build(Building.Town)
-        , 500)
+      && this.neighboringEdges.some(edge => edge.owner === getCurrentPlayer())
   }
 
   render() {

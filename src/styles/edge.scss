@@ -46,7 +46,7 @@
     background: url('../assets/cobblestone.png') #{$pixelDensity*38.7}/#{$pixelDensity*32} $pixelDensity*32;
   }
 
-  &:hover {
+  &.canBuild:hover {
     background-color: rgba(#ddd, .5);
   }
 
