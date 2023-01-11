@@ -36,6 +36,6 @@ export default abstract class Buildable {
   protected abstract get _neighboringTiles(): Tile[]
   protected abstract get _neighboringCorners(): Corner[]
 
-  abstract build(newOwner: Player, newBuilding: Building): void
+  abstract build(newBuilding: Building): void
   abstract render(): JSX.Element
 }

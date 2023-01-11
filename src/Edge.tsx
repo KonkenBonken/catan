@@ -1,7 +1,7 @@
 import { PlayerColors } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
-import Player, { Players } from './Player'
+import { getCurrentPlayer } from './Player'
 import board from './Board'
 import type Corner from './Corner'
 import Buildable from './Buildable'
@@ -87,12 +87,12 @@ export default class Edge extends Buildable {
   }
 
   private onClick() {
-    this.build(Players[Math.floor(Math.random() * 4)])
+    this.build()
   }
 
-  build(newOwner: Player) {
+  build() {
     if (!this.hasRoad) {
-      this.owner = newOwner;
+      this.owner = getCurrentPlayer();
       rerender();
     }
   }

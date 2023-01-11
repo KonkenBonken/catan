@@ -22,7 +22,7 @@
   isolation: isolate;
   border-radius: 40%;
 
-  &:not(.hasBuilding):hover {
+  &.canBuild:hover {
     background-color: rgba(#ddd, .5);
   }
 

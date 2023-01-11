@@ -1,5 +1,5 @@
 import { PlayerColors, Building, Resource } from './utils/enums'
-import Player, { Players, nextPlayer } from './Player'
+import { getCurrentPlayer } from './Player'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
@@ -52,16 +52,23 @@ export default class Corner extends Buildable {
     return neighbors.filter(tile => tile && tile.resource !== Resource.Desert);
   }
 
+  get canBuild() {
+    return (!this.hasBuilding || (this.building === Building.House && this.owner === getCurrentPlayer()))
+      && this.neighboringEdges.some(corner => corner.owner === getCurrentPlayer())
+  }
+
   constructor() {
     super();
     if (Math.random() < .3)
-      this.build(nextPlayer(), [Building.House, Building.Town][Math.floor(Math.random() * 2)])
+      setTimeout(() =>
+        this.build(Building.Town)
+        , 500)
   }
 
   render() {
     return <div
       onClick={() => this.onClick()}
-      className={cls('corner', { hasBuilding: this.hasBuilding, hasTown: this.building === Building.Town }, PlayerColors[this.color ?? -1])}
+      className={cls('corner', { hasBuilding: this.hasBuilding, hasTown: this.building === Building.Town, canBuild: this.canBuild }, PlayerColors[this.color ?? -1])}
     >
       {this.building === Building.Town && <>
         <div className={cls('townHouse')} />
@@ -71,20 +78,18 @@ export default class Corner extends Buildable {
   }
 
   private onClick() {
-    this.build(
-      Players[Math.floor(Math.random() * 4)],
-      [Building.House, Building.Town][Math.floor(Math.random() * 2)]
-    )
+    if (this.building === Building.House)
+      this.build(Building.Town)
+    else
+      this.build(Building.House)
   }
 
-  build(newOwner: Player, newBuilding: Building) {
-    if (
-      !this.hasBuilding ||
-      (this.building === Building.House && this.owner === newOwner)
-    ) {
-      this.owner = newOwner;
-      this.building = newBuilding;
-      rerender();
-    }
+  build(newBuilding: Building) {
+    if (!this.canBuild)
+      return false;
+    this.owner = getCurrentPlayer();
+    this.building = newBuilding;
+    rerender();
+    return true;
   }
 }
