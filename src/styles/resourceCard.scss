@@ -29,7 +29,7 @@
       scale: 1.2;
       box-shadow: 0 .2em .4em #000c;
       z-index: 1;
-      margin-left: -.3em;
+      margin-left: clamp(-.3em, count(-.0875em, .275em), .1em);
     }
 
     &:first-child {
