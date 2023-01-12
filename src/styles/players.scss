@@ -23,7 +23,7 @@
       background: linear-gradient(to right, #0000, rgba(lighten($color, 5), .75) 2em calc(100% - .5em), #0000);
 
       > .name > span {
-        color: darken($color, 20);
+        color: textClr($color);
       }
     }
   }

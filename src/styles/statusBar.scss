@@ -16,7 +16,7 @@
     }
 
     > span.#{$name} {
-      color: darken($color, 25);
+      color: textClr($color);
     }
   }
 }
