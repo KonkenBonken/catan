@@ -49,8 +49,8 @@ export default class Player {
     rerender();
   }
 
-  render() {
-    return <div className={cls('player', this.name)}>
+  render(myTurn: boolean) {
+    return <div className={cls('player', this.name, { myTurn })}>
       <div className={cls('name')}>
         Player <span>{this.name}</span>
       </div>

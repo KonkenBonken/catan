@@ -68,7 +68,7 @@ export default new (class Game {
       <Rerenderable el={() => <>
         {board.render()}
         <div className={cls('players')}>
-          {Players.map(player => player.render())}
+          {Players.map(player => player.render(player === this.currentPlayer))}
         </div>
       </>} />
       <Dice />

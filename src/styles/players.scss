@@ -16,6 +16,13 @@
     height: 1.5em;
     font-size: .5rem;
     letter-spacing: .05ch;
+    transition: .4s ease;
+    transition-property: font-size, letter-spacing;
+  }
+
+  &.myTurn > .name {
+    font-size: .6rem;
+    letter-spacing: .072ch;
   }
 
   @each $name, $color in $playerColors {
@@ -24,6 +31,14 @@
 
       > .name > span {
         color: textClr($color);
+      }
+
+      &.myTurn {
+        background: linear-gradient(to right, #0000, rgba(saturate(lighten($color, 6), 5), .75) 1.5em calc(100% - .5em), #0000);
+
+        > .name > span {
+          color: saturate(textClr($color), 25);
+        }
       }
     }
   }
