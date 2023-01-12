@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Player, { getCurrentPlayer } from "./Player";
+import Player, { Players } from "./Player";
 import rerender from "./utils/Rerender";
 import { cls } from "./utils/utilities";
 
@@ -13,7 +13,7 @@ export default function StatusBar() {
     outerSetter = innerSetter as (txt: (string | Player)[]) => void
   }, [])
 
-  return <div className={cls('statusBar', getCurrentPlayer().name)}>
+  return <div className={cls('statusBar', Players.currentPlayer.name)}>
     {text.flatMap(txt => txt instanceof Player ? ['Player ', <span className={cls(txt.name)}>{txt.name}</span>] : txt)}
   </div>
 }

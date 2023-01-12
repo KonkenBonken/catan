@@ -1,5 +1,5 @@
 import { PlayerColors, Building, Resource, GameState } from './utils/enums'
-import { getCurrentPlayer } from './Player'
+import { Players } from './Player'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
@@ -58,8 +58,8 @@ export default class Corner extends Buildable {
       case GameState.Pre:
         return !this.hasBuilding && game.allowBuild === Corner;
       case GameState.Main:
-        return (!this.hasBuilding || (this.building === Building.House && this.owner === getCurrentPlayer()))
-          && this.neighboringEdges.some(edge => edge.owner === getCurrentPlayer());
+        return (!this.hasBuilding || (this.building === Building.House && this.owner === Players.currentPlayer))
+          && this.neighboringEdges.some(edge => edge.owner === Players.currentPlayer);
       case GameState.Post:
       default:
         return false;
@@ -88,9 +88,9 @@ export default class Corner extends Buildable {
   build(newBuilding: Building) {
     if (!this.canBuild)
       return false;
-    this.owner = getCurrentPlayer();
+    this.owner = Players.currentPlayer;
     this.building = newBuilding;
-    getCurrentPlayer().onBuilding();
+    Players.currentPlayer.onBuilding();
     rerender();
     return true;
   }

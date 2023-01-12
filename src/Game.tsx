@@ -1,7 +1,7 @@
 import { cls } from './utils/utilities'
 import { Rerenderable } from './utils/Rerender'
 import board from './Board';
-import { Players, nextPlayer, getCurrentPlayer } from './Player';
+import { Players } from './Player';
 import Roll, { Dice } from './Dice';
 import { GameState } from './utils/enums';
 import Corner from './Corner';
@@ -16,7 +16,7 @@ export default new (class Game {
   allowBuild: typeof Corner | typeof Edge | null = null
 
   get currentPlayer() {
-    return getCurrentPlayer();
+    return Players.currentPlayer;
   }
 
   tilesByNumber(num: number) {
@@ -30,7 +30,7 @@ export default new (class Game {
     while (Players.every(player => player.points < 10)) {
       setStatus(this.currentPlayer, "'s turn");
       await this.nextTurn();
-      nextPlayer();
+      Players.nextPlayer();
     }
     console.log(Players.find(player => player.points >= 10), 'Won!');
     this.state = GameState.Post;
@@ -58,7 +58,7 @@ export default new (class Game {
         setStatus(this.currentPlayer, ', build a road');
         await this.currentPlayer.nextRoad;
       }
-      nextPlayer();
+      Players.nextPlayer();
     }
     this.allowBuild = null;
   }

@@ -69,27 +69,24 @@ export const Players = new (class Players extends Array<Player> {
   readonly Blue = new Player(PlayerColors.Blue);
   readonly Green = new Player(PlayerColors.Green);
 
-  protected 0 = this.Red;
-  protected 1 = this.Yellow;
-  protected 2 = this.Blue;
-  protected 3 = this.Green;
+  private playerOrder = shuffle([this.Red, this.Yellow, this.Blue, this.Green]);
+
+  protected readonly 0 = this.playerOrder[0];
+  protected readonly 1 = this.playerOrder[1];
+  protected readonly 2 = this.playerOrder[2];
+  protected readonly 3 = this.playerOrder[3];
+
+  private readonly turnGenerator = (function* (players: Player[]) {
+    let i = 0;
+    while (true)
+      yield players[i++ % players.length]
+  })(this.playerOrder);
+
+  currentPlayer = this.turnGenerator.next().value;
+
+  nextPlayer() {
+    this.currentPlayer = this.turnGenerator.next().value;
+    rerender();
+    return this.currentPlayer;
+  }
 })()
-
-const turnGenerator = (function* () {
-  const players = shuffle(Players);
-  let i = 0;
-  while (true)
-    yield players[i++ % players.length]
-})()
-
-let currentPlayer = turnGenerator.next().value;
-
-export function getCurrentPlayer() {
-  return currentPlayer;
-}
-
-export function nextPlayer() {
-  currentPlayer = turnGenerator.next().value;
-  rerender();
-  return currentPlayer;
-}
