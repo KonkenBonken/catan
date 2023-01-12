@@ -1,0 +1,22 @@
+@use "./consts.scss" as *;
+
+.statusBar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: lightblue;
+  text-align: center;
+  font-size: .75rem;
+  height: 1rem;
+
+  @each $name, $color in $playerColors {
+    &.#{$name} {
+      background: radial-gradient(at top, rgba(lighten($color, 1), .9) 50%, #0000);
+    }
+
+    > span.#{$name} {
+      color: darken($color, 25);
+    }
+  }
+}

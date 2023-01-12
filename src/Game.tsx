@@ -6,6 +6,7 @@ import Roll, { Dice } from './Dice';
 import { GameState } from './utils/enums';
 import Corner from './Corner';
 import Edge from './Edge';
+import StatusBar, { setStatus } from './StatusBar';
 
 export default new (class Game {
   readonly board = board
@@ -27,6 +28,7 @@ export default new (class Game {
 
     this.state = GameState.Main;
     while (Players.every(player => player.points < 10)) {
+      setStatus(this.currentPlayer, "'s turn");
       await this.nextTurn();
       nextPlayer();
     }
@@ -50,8 +52,10 @@ export default new (class Game {
     for (const _ of Players) {
       for (let i = 0; i < 2; i++) {
         this.allowBuild = Corner;
+        setStatus(this.currentPlayer, ', build a house');
         await this.currentPlayer.nextBuilding;
         this.allowBuild = Edge;
+        setStatus(this.currentPlayer, ', build a road');
         await this.currentPlayer.nextRoad;
       }
       nextPlayer();
@@ -68,6 +72,7 @@ export default new (class Game {
         </div>
       </>} />
       <Dice />
+      <StatusBar />
     </div>;
   }
 })()
