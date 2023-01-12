@@ -1,7 +1,7 @@
 import { cls } from './utils/utilities'
 import { Rerenderable } from './utils/Rerender'
 import board from './Board';
-import { Players } from './Player';
+import Players from './Player';
 import Roll, { Dice } from './Dice';
 import { GameState } from './utils/enums';
 import Corner from './Corner';

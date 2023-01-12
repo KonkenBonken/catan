@@ -1,7 +1,7 @@
 import { GameState, PlayerColors } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
-import { Players } from './Player'
+import Players from './Player'
 import board from './Board'
 import type Corner from './Corner'
 import Buildable from './Buildable'

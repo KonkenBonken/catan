@@ -1,4 +1,4 @@
-import type Player from './Player'
+import type { Player } from './Player'
 import type Edge from './Edge'
 import type Corner from './Corner'
 import type Tile from './Tile'

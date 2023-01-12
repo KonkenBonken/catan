@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Player, { Players } from "./Player";
+import Players, { Player } from "./Player";
 import rerender from "./utils/Rerender";
 import { cls } from "./utils/utilities";
 

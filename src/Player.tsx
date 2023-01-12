@@ -6,7 +6,7 @@ import ResourceCard from './ResourceCard'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender';
 
-export default class Player {
+export class Player {
   resources: ResourceCard[] = []
 
   resolveNextBuilding: () => void = () => false;
@@ -63,7 +63,7 @@ export default class Player {
   }
 }
 
-export const Players = new (class Players extends Array<Player> {
+export default new (class Players extends Array<Player> {
   readonly Red = new Player(PlayerColors.Red);
   readonly Yellow = new Player(PlayerColors.Yellow);
   readonly Blue = new Player(PlayerColors.Blue);

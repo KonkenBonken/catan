@@ -1,5 +1,5 @@
 import { PlayerColors, Building, Resource, GameState } from './utils/enums'
-import { Players } from './Player'
+import Players from './Player'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import board from './Board';
