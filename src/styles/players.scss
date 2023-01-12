@@ -11,10 +11,11 @@
 .player {
   padding: .3em .5em .2em;
   height: 2.85em;
+  font-size: 1rem;
 
   > .name {
     height: 1.5em;
-    font-size: .5rem;
+    font-size: .5em;
     letter-spacing: .05ch;
     transition: .4s ease;
     transition-property: font-size, letter-spacing;
@@ -40,6 +41,41 @@
           color: saturate(textClr($color), 25);
         }
       }
+    }
+  }
+
+  &.throwCards {
+    position: fixed;
+    top: 40vh;
+    left: 50vw;
+    translate: -50% -50%;
+    font-size: 2rem;
+    width: 90vw;
+    z-index: 4;
+
+    > .resources {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      inset: 0;
+
+      > .card {
+        transform: none;
+        margin: .1em;
+        transition-property: translate, scale;
+
+        &.selected {
+          scale: 1.1;
+          box-shadow: 0 .2em .4em #000c;
+          translate: 0 -.3em;
+        }
+      }
+    }
+
+    > .name {
+      direction: ltr;
+      margin-left: 8ch;
     }
   }
 }

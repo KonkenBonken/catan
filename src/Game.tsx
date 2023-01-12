@@ -39,10 +39,8 @@ export default new (class Game {
   async nextTurn(instant = false) {
     const rolledNumber = await Roll(instant);
 
-    if (rolledNumber === 7) {
-      console.warn('Rolled 7')
-      return this.nextTurn();
-    }
+    if (rolledNumber === 7)
+      return this.rolledSeven();
 
     for (const tile of this.tilesByNumber(rolledNumber))
       tile.giveResources()
@@ -61,6 +59,19 @@ export default new (class Game {
       Players.nextPlayer();
     }
     this.allowBuild = null;
+  }
+
+  async rolledSeven() {
+    for (const _ of Players) {
+      if (this.currentPlayer.resources.length > 7) {
+        const throwCount = Math.floor(this.currentPlayer.resources.length / 2);
+        setStatus(this.currentPlayer, `, throw away ${throwCount} cards`);
+        await this.currentPlayer.throwCards(throwCount);
+      }
+      Players.nextPlayer();
+    }
+
+    return this.nextTurn();
   }
 
   render() {

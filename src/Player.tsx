@@ -7,7 +7,8 @@ import { cls } from './utils/utilities'
 import rerender from './utils/Rerender';
 
 export class Player {
-  resources: ResourceCard[] = []
+  resources: ResourceCard[] = [];
+  private throwCardsMode = false;
 
   resolveNextBuilding: () => void = () => false;
   nextBuilding = new Promise<void>(resolve => this.resolveNextBuilding = resolve);
@@ -49,8 +50,34 @@ export class Player {
     rerender();
   }
 
+  async throwCards(count: number) {
+    this.throwCardsMode = true;
+
+    const selectedCards: ResourceCard[] = [];
+    let resolve;
+    const promise = new Promise(r => resolve = r);
+
+    function onSelect() {
+      if (selectedCards.length === count)
+        resolve()
+    }
+
+    for (const card of this.resources)
+      card.throwCardsMode(selectedCards, onSelect);
+
+    await promise;
+
+    this.resources = this.resources.filter(card => !selectedCards.includes(card));
+
+    for (const card of this.resources)
+      card.throwCardsMode(false);
+
+    this.throwCardsMode = false;
+    rerender();
+  }
+
   render(myTurn: boolean) {
-    return <div className={cls('player', this.name, { myTurn })}>
+    return <div className={cls('player', this.name, { myTurn, throwCards: this.throwCardsMode })}>
       <div className={cls('name')}>
         Player <span>{this.name}</span>
       </div>
