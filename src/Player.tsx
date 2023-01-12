@@ -9,6 +9,11 @@ import rerender from './utils/Rerender';
 export default class Player {
   resources: ResourceCard[] = []
 
+  resolveNextBuilding: () => void = () => false;
+  nextBuilding = new Promise<void>(resolve => this.resolveNextBuilding = resolve);
+  resolveNextRoad: () => void = () => false;
+  nextRoad = new Promise<void>(resolve => this.resolveNextRoad = resolve);
+
   constructor(readonly color: PlayerColors) { };
 
   get Corners() {
@@ -25,6 +30,16 @@ export default class Player {
 
   get name() {
     return PlayerColors[this.color]
+  }
+
+  onBuilding() {
+    this.resolveNextBuilding();
+    this.nextBuilding = new Promise<void>(resolve => this.resolveNextBuilding = resolve);
+  }
+
+  onRoad() {
+    this.resolveNextRoad();
+    this.nextRoad = new Promise<void>(resolve => this.resolveNextRoad = resolve);
   }
 
   addResource(resource: Resource, tileDiv?: HTMLDivElement, town = false) {

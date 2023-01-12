@@ -1,10 +1,11 @@
-import { PlayerColors } from './utils/enums'
+import { GameState, PlayerColors } from './utils/enums'
 import { cls } from './utils/utilities'
 import rerender from './utils/Rerender'
 import { getCurrentPlayer } from './Player'
 import board from './Board'
 import type Corner from './Corner'
 import Buildable from './Buildable'
+import game from './Game';
 
 export default class Edge extends Buildable {
 
@@ -80,8 +81,17 @@ export default class Edge extends Buildable {
   }
 
   get canBuild() {
-    return !this.hasRoad
-      && this.neighboringEdges.some(edge => edge.owner === getCurrentPlayer())
+    switch (game.state) {
+      case GameState.Pre:
+        return !this.hasRoad && game.allowBuild === Edge
+          && this.neighboringCorners.some(corner => corner.owner === getCurrentPlayer());
+      case GameState.Main:
+        return !this.hasRoad
+          && this.neighboringEdges.some(edge => edge.owner === getCurrentPlayer());
+      case GameState.Post:
+      default:
+        return false;
+    }
   }
 
   render() {
@@ -99,6 +109,7 @@ export default class Edge extends Buildable {
     if (!this.canBuild)
       return false;
     this.owner = getCurrentPlayer();
+    getCurrentPlayer().onRoad();
     rerender();
     return true;
   }

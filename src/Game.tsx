@@ -4,11 +4,15 @@ import board from './Board';
 import { Players, nextPlayer, getCurrentPlayer } from './Player';
 import Roll, { Dice } from './Dice';
 import { GameState } from './utils/enums';
+import Corner from './Corner';
+import Edge from './Edge';
 
 export default new (class Game {
   readonly board = board
   readonly players = Players
+
   state = GameState.Pre
+  allowBuild: typeof Corner | typeof Edge | null = null
 
   get currentPlayer() {
     return getCurrentPlayer();
@@ -19,6 +23,8 @@ export default new (class Game {
   }
 
   async startGame() {
+    await this.preGame();
+
     this.state = GameState.Main;
     while (Players.every(player => player.points < 10)) {
       await this.nextTurn();
@@ -38,6 +44,19 @@ export default new (class Game {
 
     for (const tile of this.tilesByNumber(rolledNumber))
       tile.giveResources()
+  }
+
+  async preGame() {
+    for (const _ of Players) {
+      for (let i = 0; i < 2; i++) {
+        this.allowBuild = Corner;
+        await this.currentPlayer.nextBuilding;
+        this.allowBuild = Edge;
+        await this.currentPlayer.nextRoad;
+      }
+      nextPlayer();
+    }
+    this.allowBuild = null;
   }
 
   render() {

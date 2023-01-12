@@ -16,3 +16,5 @@ root.render(
     {game.render()}
   </StrictMode>
 );
+
+game.startGame();
