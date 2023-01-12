@@ -44,6 +44,8 @@ export default class Player {
 
   addResource(resource: Resource, tileDiv?: HTMLDivElement, town = false) {
     this.resources.push(new ResourceCard(resource, tileDiv));
+    if (town)
+      this.resources.push(new ResourceCard(resource, tileDiv));
     rerender();
   }
 
