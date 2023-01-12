@@ -54,18 +54,14 @@ export class Player {
     this.throwCardsMode = true;
 
     const selectedCards: ResourceCard[] = [];
-    let resolve;
-    const promise = new Promise(r => resolve = r);
 
-    function onSelect() {
-      if (selectedCards.length === count)
-        resolve()
-    }
-
-    for (const card of this.resources)
-      card.throwCardsMode(selectedCards, onSelect);
-
-    await promise;
+    await new Promise<void>(resolve => {
+      for (const card of this.resources)
+        card.throwCardsMode(selectedCards, () => {
+          if (selectedCards.length === count)
+            resolve()
+        });
+    });
 
     this.resources = this.resources.filter(card => !selectedCards.includes(card));
 
