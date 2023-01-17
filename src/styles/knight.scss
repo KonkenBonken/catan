@@ -1,0 +1,17 @@
+@use "./consts.scss" as *;
+
+.knight {
+  background-image: url('../assets/knight.png');
+  background-size: 100%;
+  width: $pixelDensity*50;
+  height: $pixelDensity*48;
+  position: absolute;
+  top: .75em;
+  image-rendering: pixelated;
+  z-index: 4;
+  filter: contrast(1.5) drop-shadow(.1em 1.2em .3em #000);
+}
+
+.knight ~ .tileImage:not(.Desert) {
+  filter: brightness(.5);
+}
