@@ -1,3 +1,5 @@
+import use_Promise from 'use-promise-hook'
+
 import { Resource, Building } from './utils/enums'
 import { cls } from './utils/utilities'
 import TileImage from './TileImage'
@@ -27,7 +29,8 @@ export default class Tile {
   }
 
   nextClick() {
-    const prom = new Promise<Tile>(res => this.resolveClick = () => res(this));
+    let prom: Promise<Tile>;
+    [prom, this.resolveClick] = use_Promise(this as Tile);
     rerender();
     return prom;
   }
