@@ -1,4 +1,5 @@
 import shuffle from 'shuffle-list'
+import use_Promise from 'use-promise-hook'
 
 import { Building, PlayerColors, Resource } from './utils/enums'
 import board from './Board'
@@ -10,12 +11,15 @@ export class Player {
   resources: ResourceCard[] = [];
   private throwCardsMode = false;
 
-  resolveNextBuilding: () => void = () => false;
-  nextBuilding = new Promise<void>(resolve => this.resolveNextBuilding = resolve);
-  resolveNextRoad: () => void = () => false;
-  nextRoad = new Promise<void>(resolve => this.resolveNextRoad = resolve);
+  resolveNextBuilding: () => void;
+  nextBuilding: Promise<void>;
+  resolveNextRoad: () => void;
+  nextRoad: Promise<void>;
 
-  constructor(readonly color: PlayerColors) { };
+  constructor(readonly color: PlayerColors) {
+    [this.nextBuilding, this.resolveNextBuilding] = use_Promise();
+    [this.nextRoad, this.resolveNextRoad] = use_Promise();
+  };
 
   get Corners() {
     return board.corners.flat().filter(corner => corner.owner === this)
@@ -35,12 +39,12 @@ export class Player {
 
   onBuilding() {
     this.resolveNextBuilding();
-    this.nextBuilding = new Promise<void>(resolve => this.resolveNextBuilding = resolve);
+    [this.nextBuilding, this.resolveNextBuilding] = use_Promise();
   }
 
   onRoad() {
     this.resolveNextRoad();
-    this.nextRoad = new Promise<void>(resolve => this.resolveNextRoad = resolve);
+    [this.nextRoad, this.resolveNextRoad] = use_Promise();
   }
 
   addResource(resource: Resource, tileDiv?: HTMLDivElement, town = false) {

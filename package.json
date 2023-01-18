@@ -15,7 +15,8 @@
     "react-scripts": "5.0.1",
     "sass": "^1.57.1",
     "shuffle-list": "^1.0.0",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "use-promise-hook": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
