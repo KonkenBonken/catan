@@ -12,6 +12,10 @@
   }
 }
 
+.chooseTile .tile:hover > .tileImage {
+  filter: brightness(.5);
+}
+
 .tile {
   position: relative;
   display: inline-grid;

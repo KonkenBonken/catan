@@ -5,10 +5,12 @@ import Tile from './Tile'
 import Corner from './Corner'
 import Edge from './Edge'
 import { TileNumbers, TileResources, Tiles, Corners, Edges } from './utils/BoardData'
+import rerender from './utils/Rerender'
 
 export default new (
   class Board {
     tiles: Tile[][] = [];
+    private chooseTileMode = false;
 
     corners = Object.seal(
       Corners.map(length =>
@@ -28,6 +30,21 @@ export default new (
         this.tiles.push(tiles.splice(0, width))
     }
 
+    get robbedTile() {
+      return this.tiles.flat().find(tile => tile.hasRobber) as Tile;
+    }
+
+    async chooseTile(exclude?: Tile) {
+      this.chooseTileMode = true;
+
+      const tile = await Promise.any(this.tiles.flat().filter(tile => tile !== exclude).map(tile => tile.nextClick()));
+
+      this.chooseTileMode = false;
+      rerender();
+
+      return tile;
+    }
+
     render() {
       return (<div className={cls('board')}>
         <div className={cls('corners')}>
@@ -44,7 +61,7 @@ export default new (
             </div>)
           }
         </div>
-        <div className={cls('tiles')}>
+        <div className={cls('tiles', { chooseTile: this.chooseTileMode })}>
           {
             this.tiles.map(tileRow => <div>
               {tileRow.map(tile => tile.render())}

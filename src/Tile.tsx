@@ -2,13 +2,15 @@ import { Resource, Building } from './utils/enums'
 import { cls } from './utils/utilities'
 import TileImage from './TileImage'
 import board from './Board'
+import rerender from './utils/Rerender'
 
 export default class Tile {
   private tileDiv: HTMLDivElement | undefined;
-  hasKnight: boolean;
+  hasRobber: boolean;
+  resolveClick?: () => void;
 
   constructor(readonly resource: Resource, readonly number: number) {
-    this.hasKnight = resource === Resource.Desert;
+    this.hasRobber = resource === Resource.Desert;
   }
 
   get neighboringEdges() {
@@ -19,8 +21,19 @@ export default class Tile {
     return board.corners.flat().filter(corner => corner.neighboringTiles.includes(this));
   }
 
+  setRobber(has: boolean) {
+    this.hasRobber = has;
+    rerender()
+  }
+
+  nextClick() {
+    const prom = new Promise<Tile>(res => this.resolveClick = () => res(this));
+    rerender();
+    return prom;
+  }
+
   giveResources() {
-    if (this.resource !== Resource.Desert)
+    if (this.resource !== Resource.Desert && !this.hasRobber)
       for (const corner of this.neighboringCorners)
         if (corner.hasBuilding && corner.owner)
           corner.owner.addResource(
@@ -31,8 +44,12 @@ export default class Tile {
   }
 
   render() {
-    return <div className={cls('tile')} ref={div => this.tileDiv = div ?? undefined}>
-      {this.hasKnight && <div className={cls('knight')} />}
+    return <div
+      className={cls('tile')}
+      ref={div => this.tileDiv = div ?? undefined}
+      onClick={this.resolveClick}
+    >
+      {this.hasRobber && <div className={cls('robber')} />}
       <TileImage resource={this.resource} />
       {!!this.number && <div className={cls('tileNumber', { marked: Math.abs(this.number - 7) === 1 })}>{this.number}</div>}
     </div>

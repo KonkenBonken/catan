@@ -71,7 +71,10 @@ export default new (class Game {
       Players.nextPlayer();
     }
 
-    return this.nextTurn();
+    setStatus(this.currentPlayer, ', choose where to put the robber');
+    const newTile = await this.board.chooseTile(this.board.robbedTile);
+    this.board.robbedTile.setRobber(false);
+    newTile.setRobber(true);
   }
 
   render() {
